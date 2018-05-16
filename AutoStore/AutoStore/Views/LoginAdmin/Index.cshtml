@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminLoginLayout.cshtml";
+}
+
+
+
+<div>
+    <a class="hiddenanchor" id="signup"></a>
+    <a class="hiddenanchor" id="signin"></a>
+
+    <div class="login_wrapper">
+        <div class="animate form login_form">
+            <section class="login_content">
+                @using (Html.BeginForm("check","LoginAdmin"))
+                {
+                    <div>
+                        <h1>Login Form</h1>
+                        <div>
+                            <input type="text" class="form-control" placeholder="Username" name="username" required="" />
+                        </div>
+                        <div>
+                            <input type="password" class="form-control" placeholder="Password" name="pass" />
+                        </div>
+                        <div>
+                            <input class="btn btn-default submit" type="submit" value="Login">
+                            <a class="reset_pass" href="#">Lost your password?</a>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+                            <p class="change_link">
+                                You need administrator account to enter this site!
+
+                            </p>
+
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+                                <h1><i class="fa fa-renren"></i> Auto Store</h1>
+                                <p>©2018 All Rights Reserved. Privacy and Terms</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                
+            </section>
+        </div>
+
+        
+    </div>
+</div>
+
