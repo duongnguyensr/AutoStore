@@ -30,5 +30,14 @@ namespace AutoStore.Controllers.ClientService
             }
             return View();
         }
+
+
+        public ActionResult Logout()
+        {
+            Session.Remove("UserID");
+            return RedirectToAction("Index", "Welcome");
+        }
+
+
     }
 }
