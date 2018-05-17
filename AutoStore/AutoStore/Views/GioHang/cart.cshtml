@@ -1,0 +1,25 @@
+﻿@model IEnumerable<AutoStore.Models.GIOHANG>
+
+@foreach (var item in Model)
+{
+    <div class="owl-item col-md-3" style="width: 285px;">
+        <div class="b-featured__item">
+
+            <button id="@item.MAKH+@item.MASP" class="btn btn-danger" type="reset" style="border-radius: 50%;width:2.5em;height:2.5em;margin-left:180px" onclick="delitem(@item.MAKH,'@item.MASP')">
+                <i class="fa fa-close"></i>
+            </button>
+          
+            <a>
+                <img src="@item.SANPHAM.HINHANH" alt="@item.SANPHAM.TENSP">
+            </a>
+            
+            <h5><a href="detail.html">@item.SANPHAM.TENSP</a>
+            </h5>
+            <div class="b-featured__item-price">
+                $@item.SANPHAM.DONGIA 
+            </div>
+            <span class="badge" style="margin:10px 0 0 10px">@item.SOLUONG Items</span>
+            
+        </div>
+    </div>
+}

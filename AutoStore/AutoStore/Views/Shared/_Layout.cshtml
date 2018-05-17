@@ -67,25 +67,30 @@
                                 <li>
                                     <a><i class="fa fa-list"></i> Danh mục <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="@Url.Action("Index", null, new { area = string.Empty, controller = "KhachHang" }, Request.Url.Scheme)">Khách hàng</a></li>
-                                        <li><a href="@Url.Action("Index", null, new { area = string.Empty, controller = "NhanVien" }, Request.Url.Scheme)">Nhân viên</a></li>
+                                        <li><a href="@Url.Action("Index", null, new { area = string.Empty, controller = "NhaSanXuat" }, Request.Url.Scheme)">Nhà sản xuất</a></li>
+                                        <li><a href="@Url.Action("Index", null, new { area = string.Empty, controller = "NhaCungCap" }, Request.Url.Scheme)">Nhà cung cấp</a></li>
+                                        <li><a href="@Url.Action("Index", null, new { area = string.Empty, controller = "LoaiSanPham" }, Request.Url.Scheme)">Loại sản phẩm</a></li>
+                                        <li><a href="@Url.Action("Index", null, new { area = string.Empty, controller = "SanPham" }, Request.Url.Scheme)">Sản phẩm</a></li>
                                     </ul>
+                                    
                                 </li>
                                 <li>
                                     <a><i class="fa fa-desktop"></i> Hóa đơn <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="general_elements.html">General Elements</a></li>
-                                        <li><a href="media_gallery.html">Media Gallery</a></li>
-                                        <li><a href="typography.html">Typography</a></li>
-                                        <li><a href="icons.html">Icons</a></li>
-                                        <li><a href="glyphicons.html">Glyphicons</a></li>
-                                        <li><a href="widgets.html">Widgets</a></li>
-                                        <li><a href="invoice.html">Invoice</a></li>
-                                        <li><a href="inbox.html">Inbox</a></li>
-                                        <li><a href="calendar.html">Calendar</a></li>
+                                        <li><a href="@Url.Action("Index", null, new { area = string.Empty, controller = "PhieuNhap" }, Request.Url.Scheme)">Phiếu nhập</a></li>
+                                        <li><a href="@Url.Action("Index", null, new { area = string.Empty, controller = "PhieuXuat" }, Request.Url.Scheme)">Phiếu Xuất</a></li>
+                                        <li><a href="@Url.Action("Index", null, new { area = string.Empty, controller = "ChiTietPhieuNhap" }, Request.Url.Scheme)">Chi tiết nhập</a></li>
+                                        <li><a href="@Url.Action("Index", null, new { area = string.Empty, controller = "ChiTietPhieuXuat" }, Request.Url.Scheme)">Chi tiết xuất</a></li>
+
                                     </ul>
                                 </li>
- 
+                                <li>
+                                    <a><i class="fa fa-list"></i> Người dùng <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="@Url.Action("Index", null, new { area = string.Empty, controller = "KhachHang" }, Request.Url.Scheme)">Khách hàng</a></li>
+                                        <li><a href="@Url.Action("Index", null, new { area = string.Empty, controller = "NhanVien" }, Request.Url.Scheme)">Nhân viên</a></li>
+                                    </ul>
+                                </li>
 
                             </ul>
                         </div>

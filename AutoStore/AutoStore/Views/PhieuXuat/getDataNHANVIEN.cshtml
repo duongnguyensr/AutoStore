@@ -1,0 +1,10 @@
+﻿@model IEnumerable<AutoStore.Models.NHANVIEN>
+@{
+    Layout = null;
+}
+<option value="" disabled selected>Chọn nhân viên</option>
+
+@foreach (var item in Model)
+{
+    <option value="@item.MANV">@item.TENNV</option>
+}

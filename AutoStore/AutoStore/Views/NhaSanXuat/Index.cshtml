@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AutoStore.Models.NHACUNGCAP>
+﻿@model IEnumerable<AutoStore.Models.NHASANXUAT>
 
 
 <div class="title_left">
@@ -12,17 +12,18 @@
     </div>
 </div>
 <div class="title_right">
-    <a href="#" class="pull-right" style="margin-right:5px"><i class="fa fa-chevron-right"></i> Nhà cung cấp</a>
+    <a href="#" class="pull-right" style="margin-right:5px"><i class="fa fa-chevron-right"></i> Nhà sản xuất</a>
     <a href="#" class="pull-right" style="margin-right:5px"><i class="fa fa-chevron-right"></i> Danh mục</a>
     <a href="@Url.Action("Index", null, new { area = string.Empty, controller = "Home" }, Request.Url.Scheme)" class="pull-right" style="margin-right:5px"><i class="fa fa-home"></i> Home </a>
 </div>
+
 <div class="row">
 
 
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Nhà cung cấp<small>| Lưu trữ dữ liệu</small></h2>
+                <h2>Nhà sản xuất<small>| Lưu trữ dữ liệu</small></h2>
                 @*<button type="button" style="margin-bottom:0px;margin-right:5px" class="btn btn-primary navbar-right">Tìm kiếm</button>*@
                 <button type="button" style="margin-bottom:0px;margin-right:5px" class="btn btn-primary navbar-right" data-toggle="modal" data-target="#insert">Thêm mới</button>
                 <div class="clearfix"></div>
@@ -36,10 +37,9 @@
                                 <thead>
                                     <tr>
                                         <th style="text-align:center;width:80px">STT</th>
-                                        <th>Tên nhà cung cấp<i class="fa fa-sort pull-right"></i></th>
-                                        <th style="width: 305px;">Địa chỉ<i class="fa fa-sort pull-right"></i></th>
-                                        <th style="width: 250px;">Số điện thoại<i class="fa fa-sort pull-right"></i></th>
-                                        <th style="width: 250px;">Email<i class="fa fa-sort pull-right"></i></th>
+                                        <th>Tên nhà sản xuất<i class="fa fa-sort pull-right"></i></th>
+                                        <th style="width: 350px;">Số điện thoại<i class="fa fa-sort pull-right"></i></th>
+                                        <th style="width: 400px;">Mô tả<i class="fa fa-sort pull-right"></i></th>
                                         <th>Chức năng</th>
                                     </tr>
                                 </thead>
@@ -53,21 +53,18 @@
                                                 @{ count += 1;}
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.TENNCC)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.DIACHI)
+                                                @Html.DisplayFor(modelItem => item.TENNSX)
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.DIENTHOAI)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.EMAIL)
+                                                @Html.DisplayFor(modelItem => item.MOTA)
                                             </td>
                                             <td>
-                                                <button type="button" style="margin-bottom:0px" class="btn btn-success btn-xs" onclick="javascript:DetailFunc(@item.MANCC,'@item.TENNCC','@item.EMAIL','@item.DIENTHOAI','@item.DIACHI')">Chi tiết</button>
-                                                <button type="button" style="margin-bottom:0px" class="btn btn-warning btn-xs" onclick="javascript:setedit(@item.MANCC,'@item.TENNCC','@item.EMAIL','@item.DIENTHOAI','@item.DIACHI')">Sửa</button>
-                                                <button type="button" style="margin-bottom:0px" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" onclick="javascript:confirmDelete(@item.MANCC, '@item.TENNCC')">Xóa</button>
+                                                <button type="button" style="margin-bottom:0px" class="btn btn-success btn-xs" onclick="javascript:DetailFunc(@item.MANSX,'@item.TENNSX','@item.DIENTHOAI','@item.MOTA')">Chi tiết</button>
+                                                <button type="button" style="margin-bottom:0px" class="btn btn-warning btn-xs" onclick="javascript:setedit(@item.MANSX,'@item.TENNSX','@item.DIENTHOAI','@item.MOTA')">Sửa</button>
+                                                <button type="button" style="margin-bottom:0px" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" onclick="javascript:confirmDelete(@item.MANSX, '@item.TENNSX')">Xóa</button>
 
                                             </td>
                                         </tr>
@@ -94,31 +91,22 @@
                         <span aria-hidden="true">×</span>
                     </button>
 
-                    <h4 class="modal-title" id="myModalLabelinsert"><i class="fa  fa-chevron-right"></i>  Thêm mới nhà cung cấp</h4>
+                    <h4 class="modal-title" id="myModalLabelinsert"><i class="fa  fa-chevron-right"></i>  Thêm mới nhà sản xuất</h4>
                 </div>
                 <div class="modal-body">
 
                 </div>
-                @using (Html.BeginForm("Insert", "NhaCungCap"))
+                @using (Html.BeginForm("Insert", "NhaSanXuat"))
                 {
                     <div class="form-horizontal form-label-left" novalidate>
                         <div class="item form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
-                                Tên nhà cung cấp <span class="required">*</span>
+                                Tên nhà sản xuất <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Tên nhà cung cấp" required="required" type="text">
+                                <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" name="name" placeholder="Honda,Ducati..." required="required" type="text">
                             </div>
                         </div>
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">
-                                Email <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="email" id="email" name="email" required="required" placeholder="example@gmail.com" class="form-control col-md-7 col-xs-12">
-                            </div>
-                        </div>
-
 
                         <div class="item form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephone">
@@ -130,10 +118,10 @@
                         </div>
                         <div class="item form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">
-                                Địa chỉ <span class="required">*</span>
+                                Mô tả <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <textarea id="textarea" placeholder="Ha noi" required="required" name="adress" class="form-control col-md-7 col-xs-12"></textarea>
+                                <textarea id="textarea" placeholder="mô tả..." required="required" name="mota" class="form-control col-md-7 col-xs-12"></textarea>
                             </div>
                         </div>
 
@@ -164,49 +152,40 @@
                 <div class="modal-body">
 
                 </div>
-                @using (Html.BeginForm("update", "NhaCungCap", new { idncc = "6" }, FormMethod.Post, new { @id = "formupdate" }))
+                @using (Html.BeginForm("update", "NhaSanXuat", new { idnsx = "6" }, FormMethod.Post, new { @id = "formupdate" }))
                 {
-                    <div class="form-horizontal form-label-left" novalidate>
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
-                                Tên Khách hàng <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="nameedit" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Họ và tên" required="required" type="text">
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">
-                                Email <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="email" id="emailedit" name="email" required="required" placeholder="example@gmail.com" class="form-control col-md-7 col-xs-12">
-                            </div>
-                        </div>
-
-
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephone">
-                                Số điện thoại <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="tel" id="phoneedit" name="phone" placeholder="09********* etc..." required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">
-                                Địa chỉ <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <textarea id="textareaedit" placeholder="Ha noi" required="required" name="adress" class="form-control col-md-7 col-xs-12"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" onclick="emptyvalue()" class="btn btn-default" data-dismiss="modal">Bỏ qua</button>
-                            <button id="send1" type="submit" class="btn btn-primary">Lưu trữ</button>
+                <div class="form-horizontal form-label-left" novalidate>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                            Tên nhà sản xuất <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="nameedit" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" name="name" placeholder="Honda,Ducati..." required="required" type="text">
                         </div>
                     </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephone">
+                            Số điện thoại <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="tel" id="phoneedit" name="phone" placeholder="09********* etc..." required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">
+                            Mô tả <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <textarea id="textareaedit" placeholder="mô tả..." required="required" name="mota" class="form-control col-md-7 col-xs-12"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" onclick="emptyvalue()" class="btn btn-default" data-dismiss="modal">Bỏ qua</button>
+                        <button id="send1" type="submit" class="btn btn-primary">Lưu trữ</button>
+                    </div>
+                </div>
                 }
 
             </div>
@@ -226,10 +205,10 @@
                         <span aria-hidden="true">×</span>
                     </button>
 
-                    <h4 class="modal-title" id="myModalLabel"><i class="fa  fa-chevron-right"></i>  Xác nhận xóa nhà cung cấp</h4>
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa  fa-chevron-right"></i>  Xác nhận xóa nhà sản xuất</h4>
                 </div>
                 <div class="modal-body">
-                    <h4>Bạn có chắc chắn muốn xóa nhà cung cấp <code id="lable"></code> ?</h4>
+                    <h4>Bạn có chắc chắn muốn xóa nhà sản xuất <code id="lable"></code> ?</h4>
                 </div>
 
                 <div class="modal-footer">
@@ -246,14 +225,14 @@
 <script type="text/javascript">
 
 
-    function confirmDelete(id,ten) {
+    function confirmDelete(id, ten) {
         $('#lable').html(ten);
         $("#btnContinueDelete").click(function () {
             $.ajax({
-                url: "/NhaCungCap/Delete",
+                url: "/NhaSanXuat/Delete",
                 data: { 'Id': id },
                 datatype: 'html',
-                type:'Get',
+                type: 'Get',
                 success: function () {
                     console.log("xoa thanh cong");
                     location.reload();
@@ -267,42 +246,37 @@
 
 
 
-    function setedit(id, ten, email, phone, adress) {
+    function setedit(id, ten, phone, mota) {
         $('#edit').modal('toggle');
         $('#nameedit').val(ten);
-        $('#emailedit').val(email);
         $('#phoneedit').val(phone);
-        $('#textareaedit').val(adress);
-        $('#formupdate').attr("action", "/NhaCungCap/update?id=" + id);
+        $('#textareaedit').val(mota);
+        $('#formupdate').attr("action", "/NhaSanXuat/update?id=" + id);
     }
 
 
 
 
 
-    function DetailFunc(id, ten, email, phone, adress) {
+    function DetailFunc(id, ten, phone, mota) {
         $('#insert').modal('toggle');
         $('#myModalLabelinsert').html('<i class="fa  fa-chevron-right"></i>     Chi tiết nhà cung cấp');
         $('#name').val(ten);
-        $('#email').val(email);
         $('#phone').val(phone);
-        $('#textarea').val(adress);
+        $('#textarea').val(mota);
         $("#name").prop('disabled', true);
-        $("#email").prop('disabled', true);
         $("#phone").prop('disabled', true);
         $("#textarea").prop('disabled', true);
-        $("#send").prop('disabled',true);
+        $("#send").prop('disabled', true);
     }
 
 
     function emptyvalue() {
         $('#name').val('');
-        $('#email').val('');
         $('#phone').val('');
         $('#textarea').val('');
-        $("#send").prop('disabled',false);
+        $("#send").prop('disabled', false);
         $("#name").prop('disabled', false);
-        $("#email").prop('disabled', false);
         $("#phone").prop('disabled', false);
         $("#textarea").prop('disabled', false);
     }

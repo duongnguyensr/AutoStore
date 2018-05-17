@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<AutoStore.Models.SANPHAM>
 @{
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
@@ -72,337 +72,56 @@
         <div class="row">
             <div class="col-lg-9 col-sm-8 col-xs-12">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-xs-12">
-                        <div class="b-items__cell wow zoomInUp" data-wow-delay="0.5s">
-                            <div class="b-items__cars-one-img">
-                                <img class='img-responsive' src="~/Content/ClientVender/media/260x230/chevroletTable.jpg" alt='chevrolet' />
-                                <a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-                                <span class="b-items__cars-one-img-type m-premium">PREMIUM</span>
-                                <form action="/" method="post">
-                                    <input type="checkbox" name="check1" id='check1' />
-                                    <label for="check1" class="b-items__cars-one-img-check"><span class="fa fa-check"></span></label>
-                                </form>
-                            </div>
-                            <div class="b-items__cell-info">
-                                <div class="s-lineDownLeft b-items__cell-info-title">
-                                    <h2 class="">Chevrolet Silverado 1500</h2>
+                    @{ string checkid = "check";}
+                    @foreach (var item in Model)
+                    {
+                       { checkid = checkid + "" + item.MASP;}
+                        <div class="col-lg-4 col-md-6 col-xs-12">
+                            <div class="b-items__cell wow zoomInUp" data-wow-delay="0.2s">
+                                <div class="b-items__cars-one-img" >
+                                    <img style="margin-top:50px" class='img-responsive' src="@item.HINHANH" alt='@item.TENSP' />
+                                    <a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
+                                    <span class="b-items__cars-one-img-type m-premium">PREMIUM</span>
+                                    <form action="/GioHang/AddToCart?idsp=@item.MASP" method="post">
+                                     
+                                       
+                                    </form>
                                 </div>
-                                <p>In a pickup market gone fancy, the Silverado sticks to its basic-truck recipe. The steering is accurate, and the ...</p>
-                                <div class="row m-smallPadding">
-                                    <div class="col-xs-6">
-                                        <ul>
-                                            <li>Registered 2015</li>
-                                            <li>Used</li>
-                                            <li>8-Speed Automatic </li>
-                                            <li>Petrol</li>
-                                        </ul>
-                                        <h5 class="b-items__cell-info-price">$29,415</h5>
+                                <div class="b-items__cell-info" style="height:278px;position: absolute;bottom:90px;padding-left:5px">
+                                    <div  class="s-lineDownLeft b-items__cell-info-title" style="width:240px">
+                                        <h2>@item.TENSP</h2>
                                     </div>
-                                    <div class="col-xs-6">
-                                        <div class="b-items__cell-info-km">
-                                            <span class="fa fa-tachometer"></span>
-                                            <p>31,730 KM</p>
+                                    <p>In a pickup market gone fancy, the Silverado sticks to its basic-truck recipe. The steering is accurate, and the ...</p>
+                                    <div class="row m-smallPadding">
+                                        <div class="col-xs-6">
+                                            <ul>
+                                                <li>Registered @item.YEAR</li>
+                                                <li>Used</li>
+                                                <li>8-Speed Automatic </li>
+                                                <li>Petrol</li>
+                                            </ul>
+                                            <h5 class="b-items__cell-info-price">$@item.DONGIA</h5>
                                         </div>
-                                        <a href="detail.html" class="btn m-btn">VIEW DETAILS<span class="fa fa-angle-right"></span></a>
+                                        <div class="col-xs-6">
+                                            <div class="b-items__cell-info-km">
+                                               
+                                                <button id="@item.MASP" class="btn btn-danger" type="reset" onclick="addCart(@item.MASP)">
+                                                    <i class="fa fa-shopping-cart"></i> Add 
+                                                </button>
+                                                
+                                                <p>@item.KM KM</p>
+
+                                            </div>
+                                            <a href="detail.html" class="btn m-btn">VIEW DETAILS<span class="fa fa-angle-right"></span></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-xs-12">
-                        <div class="b-items__cell wow zoomInUp" data-wow-delay="0.5s">
-                            <div class="b-items__cars-one-img">
-                                <img class='img-responsive' src="~/Content/ClientVender/media/260x230/ferrariTable.jpg" alt='ferrari' />
-                                <a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-                                <span class="b-items__cars-one-img-type m-listing">NE LISTING</span>
-                                <form action="/" method="post">
-                                    <input type="checkbox" name="check2" id='check2' />
-                                    <label for="check2" class="b-items__cars-one-img-check"><span class="fa fa-check"></span></label>
-                                </form>
-                            </div>
-                            <div class="b-items__cell-info">
-                                <div class="s-lineDownLeft b-items__cell-info-title">
-                                    <h2 class="">2015 Ferrari LaFerrar</h2>
-                                </div>
-                                <p>In a pickup market gone fancy, the Silverado sticks to its basic-truck recipe. The steering is accurate, and the ...</p>
-                                <div class="row m-smallPadding">
-                                    <div class="col-xs-6">
-                                        <ul>
-                                            <li>Registered 2015</li>
-                                            <li>Used</li>
-                                            <li>8-Speed Automatic </li>
-                                            <li>Petrol</li>
-                                        </ul>
-                                        <h5 class="b-items__cell-info-price">$1,420,112</h5>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="b-items__cell-info-km">
-                                            <span class="fa fa-tachometer"></span>
-                                            <p>31,730 KM</p>
-                                        </div>
-                                        <a href="detail.html" class="btn m-btn">VIEW DETAILS<span class="fa fa-angle-right"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-xs-12">
-                        <div class="b-items__cell wow zoomInUp" data-wow-delay="0.5s">
-                            <div class="b-items__cars-one-img">
-                                <img class='img-responsive' src="~/Content/ClientVender/media/260x230/maximaTable.jpg" alt='maxima' />
-                                <a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-                                <span class="b-items__cars-one-img-type m-premium">PREMIUM</span>
-                                <form action="/" method="post">
-                                    <input type="checkbox" name="check3" id='check3' />
-                                    <label for="check3" class="b-items__cars-one-img-check"><span class="fa fa-check"></span></label>
-                                </form>
-                            </div>
-                            <div class="b-items__cell-info">
-                                <div class="s-lineDownLeft b-items__cell-info-title">
-                                    <h2 class="">Nissan Maxima SV</h2>
-                                </div>
-                                <p>In a pickup market gone fancy, the Silverado sticks to its basic-truck recipe. The steering is accurate, and the ...</p>
-                                <div class="row m-smallPadding">
-                                    <div class="col-xs-6">
-                                        <ul>
-                                            <li>Registered 2015</li>
-                                            <li>Used</li>
-                                            <li>8-Speed Automatic </li>
-                                            <li>Petrol</li>
-                                        </ul>
-                                        <h5 class="b-items__cell-info-price">$68,213</h5>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="b-items__cell-info-km">
-                                            <span class="fa fa-tachometer"></span>
-                                            <p>31,730 KM</p>
-                                        </div>
-                                        <a href="detail.html" class="btn m-btn">VIEW DETAILS<span class="fa fa-angle-right"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-xs-12">
-                        <div class="b-items__cell wow zoomInUp" data-wow-delay="0.5s">
-                            <div class="b-items__cars-one-img">
-                                <img class='img-responsive' src="~/Content/ClientVender/media/260x230/mersTable.jpg" alt='mers' />
-                                <a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-                                <form action="/" method="post">
-                                    <input type="checkbox" name="check4" id='check4' />
-                                    <label for="check4" class="b-items__cars-one-img-check"><span class="fa fa-check"></span></label>
-                                </form>
-                            </div>
-                            <div class="b-items__cell-info">
-                                <div class="s-lineDownLeft b-items__cell-info-title">
-                                    <h2 class="">Mercedes-Benz GL63 AMG</h2>
-                                </div>
-                                <p>In a pickup market gone fancy, the Silverado sticks to its basic-truck recipe. The steering is accurate, and the ...</p>
-                                <div class="row m-smallPadding">
-                                    <div class="col-xs-6">
-                                        <ul>
-                                            <li>Registered 2015</li>
-                                            <li>Used</li>
-                                            <li>8-Speed Automatic </li>
-                                            <li>Petrol</li>
-                                        </ul>
-                                        <h5 class="b-items__cell-info-price">$29,415</h5>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="b-items__cell-info-km">
-                                            <span class="fa fa-tachometer"></span>
-                                            <p>31,730 KM</p>
-                                        </div>
-                                        <a href="detail.html" class="btn m-btn">VIEW DETAILS<span class="fa fa-angle-right"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-xs-12">
-                        <div class="b-items__cell wow zoomInUp" data-wow-delay="0.5s">
-                            <div class="b-items__cars-one-img">
-                                <img class='img-responsive' src="~/Content/ClientVender/media/260x230/audiTable.jpg" alt='audi' />
-                                <a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-                                <span class="b-items__cars-one-img-type m-listing">NEW LISTING</span>
-                                <form action="/" method="post">
-                                    <input type="checkbox" name="check5" id='check5' />
-                                    <label for="check5" class="b-items__cars-one-img-check"><span class="fa fa-check"></span></label>
-                                </form>
-                            </div>
-                            <div class="b-items__cell-info">
-                                <div class="s-lineDownLeft b-items__cell-info-title">
-                                    <h2 class="">Audi S4 3.0L V6 Turbo</h2>
-                                </div>
-                                <p>In a pickup market gone fancy, the Silverado sticks to its basic-truck recipe. The steering is accurate, and the ...</p>
-                                <div class="row m-smallPadding">
-                                    <div class="col-xs-6">
-                                        <ul>
-                                            <li>Registered 2015</li>
-                                            <li>Used</li>
-                                            <li>8-Speed Automatic </li>
-                                            <li>Petrol</li>
-                                        </ul>
-                                        <h5 class="b-items__cell-info-price">$63,218</h5>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="b-items__cell-info-km">
-                                            <span class="fa fa-tachometer"></span>
-                                            <p>31,730 KM</p>
-                                        </div>
-                                        <a href="detail.html" class="btn m-btn">VIEW DETAILS<span class="fa fa-angle-right"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-xs-12">
-                        <div class="b-items__cell wow zoomInUp" data-wow-delay="0.5s">
-                            <div class="b-items__cars-one-img">
-                                <img class='img-responsive' src="~/Content/ClientVender/media/260x230/toyotaTable.jpg" alt='toyota' />
-                                <a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-                                <span class="b-items__cars-one-img-type m-premium">PREMIUM</span>
-                                <form action="/" method="post">
-                                    <input type="checkbox" name="check6" id='check6' />
-                                    <label for="check6" class="b-items__cars-one-img-check"><span class="fa fa-check"></span></label>
-                                </form>
-                            </div>
-                            <div class="b-items__cell-info">
-                                <div class="s-lineDownLeft b-items__cell-info-title">
-                                    <h2 class="">Toyota RAV4 A Class</h2>
-                                </div>
-                                <p>In a pickup market gone fancy, the Silverado sticks to its basic-truck recipe. The steering is accurate, and the ...</p>
-                                <div class="row m-smallPadding">
-                                    <div class="col-xs-6">
-                                        <ul>
-                                            <li>Registered 2015</li>
-                                            <li>Used</li>
-                                            <li>8-Speed Automatic </li>
-                                            <li>Petrol</li>
-                                        </ul>
-                                        <h5 class="b-items__cell-info-price">$48,715</h5>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="b-items__cell-info-km">
-                                            <span class="fa fa-tachometer"></span>
-                                            <p>31,730 KM</p>
-                                        </div>
-                                        <a href="detail.html" class="btn m-btn">VIEW DETAILS<span class="fa fa-angle-right"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-xs-12">
-                        <div class="b-items__cell wow zoomInUp" data-wow-delay="0.5s">
-                            <div class="b-items__cars-one-img">
-                                <img class='img-responsive' src="~/Content/ClientVender/media/260x230/jaguarTable.jpg" alt='jaguar' />
-                                <a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-                                <span class="b-items__cars-one-img-type m-owner">1 OWNER</span>
-                                <form action="/" method="post">
-                                    <input type="checkbox" name="check7" id='check7' />
-                                    <label for="check7" class="b-items__cars-one-img-check"><span class="fa fa-check"></span></label>
-                                </form>
-                            </div>
-                            <div class="b-items__cell-info">
-                                <div class="s-lineDownLeft b-items__cell-info-title">
-                                    <h2 class="">Jaugar XF 250</h2>
-                                </div>
-                                <p>In a pickup market gone fancy, the Silverado sticks to its basic-truck recipe. The steering is accurate, and the ...</p>
-                                <div class="row m-smallPadding">
-                                    <div class="col-xs-6">
-                                        <ul>
-                                            <li>Registered 2015</li>
-                                            <li>Used</li>
-                                            <li>8-Speed Automatic </li>
-                                            <li>Petrol</li>
-                                        </ul>
-                                        <h5 class="b-items__cell-info-price">$68,213</h5>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="b-items__cell-info-km">
-                                            <span class="fa fa-tachometer"></span>
-                                            <p>31,730 KM</p>
-                                        </div>
-                                        <a href="detail.html" class="btn m-btn">VIEW DETAILS<span class="fa fa-angle-right"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-xs-12">
-                        <div class="b-items__cell wow zoomInUp" data-wow-delay="0.5s">
-                            <div class="b-items__cars-one-img">
-                                <img class='img-responsive' src="~/Content/ClientVender/media/260x230/mercTable.jpg" alt='merc' />
-                                <a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-                                <form action="/" method="post">
-                                    <input type="checkbox" name="check8" id='check8' />
-                                    <label for="check8" class="b-items__cars-one-img-check"><span class="fa fa-check"></span></label>
-                                </form>
-                            </div>
-                            <div class="b-items__cell-info">
-                                <div class="s-lineDownLeft b-items__cell-info-title">
-                                    <h2 class="">Mercedes Benz GL Class</h2>
-                                </div>
-                                <p>In a pickup market gone fancy, the Silverado sticks to its basic-truck recipe. The steering is accurate, and the ...</p>
-                                <div class="row m-smallPadding">
-                                    <div class="col-xs-6">
-                                        <ul>
-                                            <li>Registered 2015</li>
-                                            <li>Used</li>
-                                            <li>8-Speed Automatic </li>
-                                            <li>Petrol</li>
-                                        </ul>
-                                        <h5 class="b-items__cell-info-price">$33,580</h5>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="b-items__cell-info-km">
-                                            <span class="fa fa-tachometer"></span>
-                                            <p>31,730 KM</p>
-                                        </div>
-                                        <a href="detail.html" class="btn m-btn">VIEW DETAILS<span class="fa fa-angle-right"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-xs-12">
-                        <div class="b-items__cell wow zoomInUp" data-wow-delay="0.5s">
-                            <div class="b-items__cars-one-img">
-                                <img class='img-responsive' src="~/Content/ClientVender/media/260x230/lexusTable.jpg" alt='lexus' />
-                                <a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-                                <span class="b-items__cars-one-img-type m-listing">NEW LISTING</span>
-                                <form action="/" method="post">
-                                    <input type="checkbox" name="check9" id='check9' />
-                                    <label for="check9" class="b-items__cars-one-img-check"><span class="fa fa-check"></span></label>
-                                </form>
-                            </div>
-                            <div class="b-items__cell-info">
-                                <div class="s-lineDownLeft b-items__cell-info-title">
-                                    <h2 class="">Lexus LS460F Sport</h2>
-                                </div>
-                                <p>In a pickup market gone fancy, the Silverado sticks to its basic-truck recipe. The steering is accurate, and the ...</p>
-                                <div class="row m-smallPadding">
-                                    <div class="col-xs-6">
-                                        <ul>
-                                            <li>Registered 2015</li>
-                                            <li>Used</li>
-                                            <li>8-Speed Automatic </li>
-                                            <li>Petrol</li>
-                                        </ul>
-                                        <h5 class="b-items__cell-info-price">$1,420,112</h5>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="b-items__cell-info-km">
-                                            <span class="fa fa-tachometer"></span>
-                                            <p>31,730 KM</p>
-                                        </div>
-                                        <a href="detail.html" class="btn m-btn">VIEW DETAILS<span class="fa fa-angle-right"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    }
+                    
+                    
+
                 </div>
                 <div class="b-items__pagination">
                     <div class="b-items__pagination-main wow zoomInUp" data-wow-delay="0.5s">
@@ -501,3 +220,46 @@
 <script src="~/Content/ClientVender/assets/bxslider/jquery.bxslider.js"></script>
 <script src="~/Content/ClientVender/assets/owl-carousel/owl.carousel.min.js"></script>
 <script src="~/Content/ClientVender/assets/slider/jquery.ui-slider.js"></script>*@
+<input type="hidden" id="hdnSession" data-value="@Request.RequestContext.HttpContext.Session["ClientUserID"]" />
+<script src="~/Content/vendors/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+
+    function addCart(id) {
+        var sessionValue = $("#hdnSession").data('value');
+        if (sessionValue != "")
+      {
+          $.ajax({
+              url: "/GioHang/AddToCart",
+              data: { 'idsp': id },
+              datatype: 'html',
+              type: 'Get',
+              success: function () {
+                  //showcart();
+                  //$('#cartmodalbody').load('/GioHang/cart');
+                  console.log("xoa thanh cong");
+                  showcart();
+              },
+              error: function () {
+              }
+          });
+      }
+      else {
+          $('#LoginModal').modal('show');
+      }
+    }
+
+    function showcart() {
+        $.ajax({
+            url: "/GioHang/cart",
+            
+            type: 'Get',
+            success: function (cart) {
+                $("#cartmodalbody").html(cart);
+                console.log("render cart thanh cong");
+
+            },
+            error: function () {
+            }
+        });
+    }
+</script>

@@ -1,0 +1,10 @@
+﻿@model IEnumerable<AutoStore.Models.SANPHAM>
+@{
+    Layout = null;
+}
+<option value="" disabled selected>Chọn sản phẩm</option>
+
+@foreach (var item in Model)
+{
+    <option value="@item.MASP">@item.TENSP</option>
+}
