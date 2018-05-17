@@ -22,6 +22,7 @@ namespace AutoStore.Models
         public virtual DbSet<PHIEUNHAP> PHIEUNHAPs { get; set; }
         public virtual DbSet<PHIEUXUAT> PHIEUXUATs { get; set; }
         public virtual DbSet<SANPHAM> SANPHAMs { get; set; }
+        public virtual DbSet<GIOHANG> GIOHANGs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -172,6 +173,14 @@ namespace AutoStore.Models
                 .HasMany(e => e.CHITIETPHIEUXUATs)
                 .WithRequired(e => e.SANPHAM)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<GIOHANG>()
+                .Property(e => e.MASP)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<GIOHANG>()
+                .Property(e => e.MAKH)
+                .IsUnicode(false);
         }
     }
 }

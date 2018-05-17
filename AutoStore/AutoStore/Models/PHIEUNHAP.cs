@@ -19,6 +19,9 @@ namespace AutoStore.Models
         [StringLength(10)]
         public string MAPN { get; set; }
 
+        [StringLength(50)]
+        public string TENPN { get; set; }
+
         [Required]
         [StringLength(10)]
         public string MANV { get; set; }
