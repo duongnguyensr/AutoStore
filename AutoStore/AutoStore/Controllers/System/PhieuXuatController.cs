@@ -68,14 +68,6 @@ namespace AutoStore.Controllers.System
                 db.SaveChanges();
             }
 
-            //if(id=="")
-            //{
-
-
-            //    KHACHHANG temp = new KHACHHANG { MAKH = FuncClass.genNextCode(), TENKH = ten, DIACHI = adress, DIENTHOAI = phone, EMAIL = email };
-            //    db.KHACHHANGs.Add(temp);
-            //    db.SaveChanges();
-            //}
             return RedirectToAction("Index");
         }
     }

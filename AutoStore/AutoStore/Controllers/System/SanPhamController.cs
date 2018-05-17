@@ -7,6 +7,7 @@ using AutoStore.Models;
 
 namespace AutoStore.Controllers.System
 {
+    [SessionTimeout]
     public class SanPhamController : Controller
     {
         DBConnection db = new DBConnection();
