@@ -7,6 +7,7 @@ using AutoStore.Models;
 
 namespace AutoStore.Controllers.System
 {
+    [SessionTimeout]
     public class NhanVienController : Controller
     {
         DBConnection db = new DBConnection();

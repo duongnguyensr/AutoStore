@@ -8,24 +8,23 @@ using AutoStore.Models;
 namespace AutoStore.Controllers.System
 {
     [SessionTimeout]
-    public class NhaCungCapController : Controller
+    public class LoaiSanPhamController : Controller
     {
         DBConnection db = new DBConnection();
+
         public ActionResult Index()
         {
-
-            return View(db.NHACUNGCAPs.ToList().OrderBy(a => a.TENNCC));
+            return View(db.LOAISANPHAMs.ToList().OrderBy(a => a.TENLOAI));
         }
 
         [HttpPost]
         public ActionResult Insert()
         {
             string objname = Request.Form["name"];
-            string objphone = Request.Form["phone"];
-            string objdiachi = Request.Form["adress"];
-            string objmail = Request.Form["email"];
-            NHACUNGCAP temp = new NHACUNGCAP { MANCC = FuncClass.genNextCode(), TENNCC = objname, DIACHI = objdiachi, DIENTHOAI = objphone, EMAIL = objmail };
-            db.NHACUNGCAPs.Add(temp);
+            string objmota = Request.Form["mota"];
+    
+            LOAISANPHAM temp = new LOAISANPHAM { MALOAI = FuncClass.genNextCode(), TENLOAI = objname, MOTA = objmota};
+            db.LOAISANPHAMs.Add(temp);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -33,9 +32,9 @@ namespace AutoStore.Controllers.System
 
         public ActionResult Delete(string ID)
         {
-            var temp = new NHACUNGCAP { MANCC = ID };
-            db.NHACUNGCAPs.Attach(temp);
-            db.NHACUNGCAPs.Remove(temp);
+            var temp = new LOAISANPHAM { MALOAI = ID };
+            db.LOAISANPHAMs.Attach(temp);
+            db.LOAISANPHAMs.Remove(temp);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -43,13 +42,12 @@ namespace AutoStore.Controllers.System
         [HttpPost]
         public ActionResult update(string id)
         {
-            var result = db.NHACUNGCAPs.SingleOrDefault(a => a.MANCC == id);
+            var result = db.LOAISANPHAMs.SingleOrDefault(a => a.MALOAI == id);
             if (result != null)
             {
-                result.TENNCC = Request.Form["name"];
-                result.EMAIL = Request.Form["email"];
-                result.DIACHI = Request.Form["adress"];
-                result.DIENTHOAI = Request.Form["phone"];
+                result.TENLOAI = Request.Form["name"];
+                result.MOTA = Request.Form["mota"];
+                
                 db.SaveChanges();
             }
 

@@ -8,13 +8,13 @@ using AutoStore.Models;
 namespace AutoStore.Controllers.System
 {
     [SessionTimeout]
-    public class NhaCungCapController : Controller
+    public class NhaSanXuatController : Controller
     {
         DBConnection db = new DBConnection();
+
         public ActionResult Index()
         {
-
-            return View(db.NHACUNGCAPs.ToList().OrderBy(a => a.TENNCC));
+            return View(db.NHASANXUATs.ToList().OrderBy(a => a.TENNSX));
         }
 
         [HttpPost]
@@ -22,10 +22,9 @@ namespace AutoStore.Controllers.System
         {
             string objname = Request.Form["name"];
             string objphone = Request.Form["phone"];
-            string objdiachi = Request.Form["adress"];
-            string objmail = Request.Form["email"];
-            NHACUNGCAP temp = new NHACUNGCAP { MANCC = FuncClass.genNextCode(), TENNCC = objname, DIACHI = objdiachi, DIENTHOAI = objphone, EMAIL = objmail };
-            db.NHACUNGCAPs.Add(temp);
+            string objmota = Request.Form["mota"];
+            NHASANXUAT temp = new NHASANXUAT { MANSX = FuncClass.genNextCode(), TENNSX = objname, DIENTHOAI = objphone, MOTA = objmota };
+            db.NHASANXUATs.Add(temp);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -33,9 +32,9 @@ namespace AutoStore.Controllers.System
 
         public ActionResult Delete(string ID)
         {
-            var temp = new NHACUNGCAP { MANCC = ID };
-            db.NHACUNGCAPs.Attach(temp);
-            db.NHACUNGCAPs.Remove(temp);
+            var temp = new NHASANXUAT { MANSX = ID };
+            db.NHASANXUATs.Attach(temp);
+            db.NHASANXUATs.Remove(temp);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -43,12 +42,11 @@ namespace AutoStore.Controllers.System
         [HttpPost]
         public ActionResult update(string id)
         {
-            var result = db.NHACUNGCAPs.SingleOrDefault(a => a.MANCC == id);
+            var result = db.NHASANXUATs.SingleOrDefault(a => a.MANSX == id);
             if (result != null)
             {
-                result.TENNCC = Request.Form["name"];
-                result.EMAIL = Request.Form["email"];
-                result.DIACHI = Request.Form["adress"];
+                result.TENNSX = Request.Form["name"];
+                result.MOTA = Request.Form["mota"];
                 result.DIENTHOAI = Request.Form["phone"];
                 db.SaveChanges();
             }
