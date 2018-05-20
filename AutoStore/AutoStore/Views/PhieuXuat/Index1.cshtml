@@ -1,0 +1,627 @@
+﻿@model IEnumerable<AutoStore.Models.PHIEUXUAT>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="title_left">
+    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-left top_search">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="title_right">
+    <a href="#" class="pull-right" style="margin-right:5px"><i class="fa fa-chevron-right"></i> Phiếu xuất</a>
+    <a href="#" class="pull-right" style="margin-right:5px"><i class="fa fa-chevron-right"></i> Hóa đơn</a>
+    <a href="@Url.Action("Index", null, new { area = string.Empty, controller = "Home" }, Request.Url.Scheme)" class="pull-right" style="margin-right:5px"><i class="fa fa-home"></i> Home </a>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active" id="buttontab1">
+                            <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><i class="fa fa-angle-right" style="font-weight:900"></i>  Phiếu Xuất</a>
+                        </li>
+                        <li role="presentation" class="" id="buttontab2">
+                            <a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-angle-right" style="font-weight:900"></i>  Chi tiết</a>
+                        </li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                            <div class="x_title">
+                                <h2>Phiếu xuất<small>| Lưu trữ dữ liệu</small></h2>
+                                @*<button type="button" style="margin-bottom:0px;margin-right:5px" class="btn btn-primary navbar-right">Tìm kiếm</button>*@
+                                <button type="button" style="margin-bottom:0px;margin-right:5px" class="btn btn-primary navbar-right" data-toggle="modal" data-target="#insert">Thêm mới</button>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <div id="datatable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="datatable" class="table table-striped table-bordered dataTable no-footer jambo_table bulk_action" role="grid" aria-describedby="datatable_info">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="text-align:center;width:80px">STT</th>
+                                                        <th>Tên phiếu xuất<i class="fa fa-sort pull-right"></i></th>
+                                                        <th>Tên nhân viên<i class="fa fa-sort pull-right"></i></th>
+                                                        <th style="width: 350px;">Ngày xuất<i class="fa fa-sort pull-right"></i></th>
+                                                        <th>Tên khách hàng<i class="fa fa-sort pull-right"></i></th>
+                                                        <th>Chức năng</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @{int count = 1; }
+                                                    @foreach (var item in Model)
+                                                    {
+                                                        <tr>
+                                                            <td style="text-align:center">
+                                                                @count
+                                                                @{ count += 1;}
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.TENPX)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.NHANVIEN.TENNV)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.NGAYXUAT)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.KHACHHANG.TENKH)
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" style="margin-bottom:0px" class="btn btn-success btn-xs" onclick="javascript:DetailFunc(@item.MAPX,'@item.TENPX','@item.MANV','@item.NGAYXUAT','@item.MAKH')">Chi tiết</button>
+                                                                <button type="button" style="margin-bottom:0px" class="btn btn-warning btn-xs" onclick="javascript:setedit(@item.MAPX,'@item.TENPX','@item.MANV','@item.NGAYXUAT','@item.MAKH')">Sửa</button>
+                                                                <button type="button" style="margin-bottom:0px" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" onclick="javascript:confirmDelete(@item.MAPX,'@item.TENPX')">Xóa</button>
+                                                            </td>
+                                                        </tr>
+                                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                            @Html.Action("GetChitietpx")
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@*------------------INSERT---------------------*@
+<div class="x_content">
+    <div class="modal fade bs-example-modal-lg" id="insert" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                    </button>
+
+                    <h4 class="modal-title" id="myModalLabelinsert"><i class="fa  fa-chevron-right"></i>  Thêm mới phiếu xuất</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                @using (Html.BeginForm("Insert", "PhieuXuat"))
+                {
+                    <div class="form-horizontal form-label-left" novalidate>
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tenpx">
+                                Tên phiếu xuất <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="tenpx" class="form-control col-md-7 col-xs-12" name="tenpx" placeholder="Tên phiếu xuất" type="text">
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                                Tên nhân viên <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="manv" class="form-control col-md-7 col-xs-12" placeholder="Chọn nhân viên" required="required" id="manv">@Html.Action("getDataNHANVIEN", "PhieuXuat")</select>
+                            </div>
+                        </div>
+
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                                Ngày xuất <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class='input-group date' id="datepicker" required="required" data-date-format="dd/mm/yyyy">
+                                    <input type="text" name="date" id="datetime" class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                                Tên khách hàng <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="makh" class="form-control col-md-7 col-xs-12" placeholder="Chọn khách hàng" required="required" id="makh">
+                                    @Html.Action("getDataKHACHHANG", "PhieuXuat")
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button" onclick="emptyvalue()" class="btn btn-default" data-dismiss="modal">Bỏ qua</button>
+                            <button id="send" type="submit" class="btn btn-primary">Lưu trữ</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@*--------------------------------------EDIT---------------------------------*@
+<div class="x_content">
+    <div class="modal fade bs-example-modal-lg" id="edit" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                    </button>
+
+                    <h4 class="modal-title" id="myModalLabelinsert"><i class="fa  fa-chevron-right"></i>  Sửa đổi dữ liệu</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                @using (Html.BeginForm("update", "PhieuXuat", new { idpn = "6" }, FormMethod.Post, new { @id = "formupdate" }))
+                {
+                    <div class="form-horizontal form-label-left" novalidate>
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tenpx">
+                                Tên phiếu xuất <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="tenpxedit" class="form-control col-md-7 col-xs-12" name="tenpx" placeholder="Tên phiếu xuất" type="text">
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                                Tên nhân viên <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="manv" class="form-control col-md-7 col-xs-12" placeholder="Chọn nhân viên" required="required" id="manvedit">@Html.Action("getDataNHANVIEN", "PHIEUXUAT")</select>
+                            </div>
+                        </div>
+
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                                Ngày nhập <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class='input-group date' id="datepickeredit" required="required" data-date-format="dd/mm/yyyy">
+                                    <input type="text" name="date" id="datetimeedit" class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                                Tên khách hàng <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="makh" class="form-control col-md-7 col-xs-12" placeholder="Chọn nhà cung cấp" required="required" id="makhedit">
+                                    @Html.Action("getDataKHACHHANG", "PhieuXuat")
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" onclick="emptyvalue()" class="btn btn-default" data-dismiss="modal">Bỏ qua</button>
+                            <button id="send" type="submit" class="btn btn-primary">Lưu trữ</button>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*--------Modal confirm delete--------------*@
+<div class="x_content">
+    <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                    </button>
+
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa  fa-chevron-right"></i>  Xác nhận xóa phiếu xuất</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>Bạn có chắc chắn muốn xóa phiếu xuất <code id="lable"></code> ?</h4>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Bỏ qua</button>
+                    <button id="btnContinueDelete" type="submit" class="btn btn-danger">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*--------------------------------------------------chi tiet--------------------------------------------*@
+
+@*------------------INSERT---------------------*@
+<div class="x_content">
+    <div class="modal fade bs-example-modal-lg" id="insert2" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                    </button>
+
+                    <h4 class="modal-title" id="myModalLabelinsert2"><i class="fa  fa-chevron-right"></i>  Thêm mới chi tiết phiếu xuất</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                @using (Html.BeginForm("Insert", "ChiTietPhieuXuat"))
+                {
+                    <div class="form-horizontal form-label-left" novalidate>
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tenpn">
+                                Tên phiếu xuất <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="tenpx2" class="form-control col-md-7 col-xs-12" placeholder="Chọn nhân viên" required="required" id="tenpx2">
+                                    <option value="" disabled selected>Chọn phiếu xuất</option>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <option value="@item.MAPX">@item.TENPX</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tensp">
+                                Tên sản phẩm <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="tensp" class="form-control col-md-7 col-xs-12"  required="required" id="tensp">
+                                    @Html.Action("getDataSANPHAM", "ChiTietPhieuXuat")
+                                   
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tenpn">
+                                Số lượng <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="soluong" class="form-control col-md-7 col-xs-12" name="soluong" placeholder="số lượng sản phẩm" type="text">
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tenpn">
+                                Đơn giá xuất <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="dongia" class="form-control col-md-7 col-xs-12" name="dongia" placeholder="đơn giá xuất" type="text">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" onclick="emptyvalue2()" class="btn btn-default" data-dismiss="modal">Bỏ qua</button>
+                            <button id="send2" type="submit" class="btn btn-primary">Lưu trữ</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*--------------------------------------EDIT---------------------------------*@
+<div class="x_content">
+    <div class="modal fade bs-example-modal-lg" id="edit2" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                    </button>
+
+                    <h4 class="modal-title" id="myModalLabelinsert"><i class="fa  fa-chevron-right"></i>  Sửa đổi dữ liệu</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                @using (Html.BeginForm("update", "PhieuXuat", new { idpn = "6" }, FormMethod.Post, new { @id = "formupdate2" }))
+                {
+                    <div class="form-horizontal form-label-left" novalidate>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tenpn">
+                                Tên phiếu xuất <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="tenpx2" class="form-control col-md-7 col-xs-12" placeholder="Chọn nhân viên" required="required" id="tenpxedit2">
+                                    @Html.Action("getDataPHIEUXUAT", "ChiTietPhieuXuat")
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tensp">
+                                Tên sản phẩm <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="tensp" class="form-control col-md-7 col-xs-12" placeholder="Chọn nhân viên" required="required" id="tenspedit">
+                                    @Html.Action("getDataSANPHAM", "ChiTietPhieuXuat")
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tenpn">
+                                Số lượng <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="soluongedit" class="form-control col-md-7 col-xs-12" name="soluong" placeholder="số lượng sản phẩm" type="text">
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tenpn">
+                                Đơn giá xuất <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="dongiaedit" class="form-control col-md-7 col-xs-12" name="dongia" placeholder="đơn giá xuất" type="text">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" onclick="emptyvalue2()" class="btn btn-default" data-dismiss="modal">Bỏ qua</button>
+                            <button id="send2" type="submit" class="btn btn-primary">Lưu trữ</button>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@*--------Modal confirm delete--------------*@
+<div class="x_content">
+    <div class="modal fade bs-example-modal-lg" id="myModal2" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                    </button>
+
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa  fa-chevron-right"></i>  Xác nhận xóa chi tiết phiếu xuất</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>Bạn có chắc chắn muốn xóa chi tiết phiếu xuất <code id="lable"></code> ?</h4>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Bỏ qua</button>
+                    <button id="btnContinueDelete2" type="submit" class="btn btn-danger">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/vendors/jquery/dist/jquery.min.js"></script>
+<script src="~/Content/vendors/moment/min/moment.min.js"></script>
+<script src="~/Content/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<link href="~/Content/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+<input type="hidden" id="hdnSession" data-value="@Request.RequestContext.HttpContext.Session["tab1"]" />
+<script type="text/javascript">
+
+
+    function confirmDelete(id, ten) {
+        $('#lable').html(ten);
+        $("#btnContinueDelete").click(function () {
+            $.ajax({
+                url: "/PhieuXuat/Delete",
+                data: { 'Id': id },
+                datatype: 'html',
+                type: 'Get',
+                success: function () {
+                    console.log("xoa thanh cong");
+                    location.reload();
+                },
+                error: function () {
+                }
+            });
+        });
+    }
+
+
+
+
+    function setedit(id,name, manv, date, makh) {
+        $('#edit').modal('toggle');
+        $('#manvedit').val(manv);
+        $('#tenpxedit').val(name);
+        $('#datetimeedit').val(date);
+        $('#makhedit').val(makh);
+        $('#formupdate').attr("action", "/PhieuXuat/update?id=" + id);
+    }
+
+
+
+
+
+    function DetailFunc(id,name, manv, date, mancc) {
+        $('#insert').modal('toggle');
+        $('#myModalLabelinsert').html('<i class="fa  fa-chevron-right"></i>     Chi tiết phiếu xuất');
+        $('#manv').val(manv);
+        $('#datetime').val(date);
+        $('#tenpx').val(name);
+        $('#makh').val(mancc);
+        $("#manv").prop('disabled', true);
+        $("#tenpx").prop('disabled', true);
+        $("#datetime").prop('disabled', true);
+        $("#makh").prop('disabled', true);
+    }
+
+
+    function emptyvalue() {
+        $('#manv').val("");
+        $('#datetime').val("");
+        $('#makh').val("");
+        $('#tenpx').val("");
+        $("#manv").prop('disabled', false);
+        $("#tenpx").prop('disabled', false);
+        $("#datetime").prop('disabled', false);
+        $("#makh").prop('disabled', false);
+    }
+
+
+    $('#datepicker').datetimepicker({
+        format: 'DD/MM/YYYY'
+    });
+    $('#datepickeredit').datetimepicker({
+        format: 'DD/MM/YYYY'
+    });
+
+    @*-----------------------------------------*@
+    function confirmDelete2(id, idsp) {
+        //$('#lable').html(ten);
+        $("#btnContinueDelete2").click(function () {
+            $.ajax({
+                url: "/ChiTietPhieuXuat/Delete",
+                data: {
+                    'Id': id,
+                    'IDSP': idsp
+                },
+                datatype: 'html',
+                type: 'Get',
+                success: function () {
+                    console.log("xoa thanh cong");
+                    location.reload();
+                },
+                error: function () {
+                }
+            });
+        });
+    }
+
+
+
+
+    function setedit2(id, idsp, soluong, dongia) {
+        $('#edit2').modal('toggle');
+        $('#tenpxedit2').val(id);
+        $('#tenspedit').val(idsp);
+        $('#soluongedit').val(soluong);
+        $('#dongiaedit').val(dongia);
+        $("#tenpxedit2").prop('disabled', true);
+        $("#tenspedit").prop('disabled', true);
+        $('#formupdate2').attr("action", "/ChiTietPhieuXuat/update?id=" + id + "&idsp=" + idsp);
+    }
+
+
+
+
+
+    function DetailFunc2(id, idsp, soluong, dongia) {
+        $('#insert2').modal('toggle');
+        $('#myModalLabelinsert2').html('<i class="fa  fa-chevron-right"></i>     Chi tiết phiếu xuất');
+        $('#tenpx2').val(id);
+        $('#tensp').val(idsp);
+        $('#soluong').val(soluong);
+        $('#dongia').val(dongia);
+        $("#tenpx2").prop('disabled', true);
+        $("#tensp").prop('disabled', true);
+        $("#soluong").prop('disabled', true);
+        $("#dongia").prop('disabled', true);
+    }
+
+
+    function emptyvalue2() {
+        $('#tenpx2').val("");
+        $('#tensp').val("");
+        $('#soluong').val("");
+        $('#dongia').val("");
+        $("#tenpx2").prop('disabled', false);
+        $("#tensp").prop('disabled', false);
+        $("#soluong").prop('disabled', false);
+        $("#dongia").prop('disabled', false);
+    }
+
+    $(document).ready(function () {
+        console.log("ready!");
+        var sessionValue = $("#hdnSession").data('value');
+        if (sessionValue != "") {
+            $("#tab_content1").attr("class", "tab-pane fade");
+            $("#tab_content2").attr("class", "tab-pane fade active in");
+            $("#buttontab1").attr("class", "");
+            $("#buttontab2").attr("class", "active");
+        }
+     
+        
+    });
+
+</script>
+
+

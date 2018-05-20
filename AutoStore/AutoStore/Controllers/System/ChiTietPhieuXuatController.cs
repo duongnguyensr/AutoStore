@@ -25,21 +25,22 @@ namespace AutoStore.Controllers.System
 
         public ActionResult getDataSANPHAM()
         {
-            var maSP = db.SANPHAMs.ToList().OrderBy(a => a.TENSP);
-            return View(maSP);
+            
+            return View(db.SANPHAMs.ToList().OrderBy(a => a.TENSP));
         }
 
         [HttpPost]
         public ActionResult Insert()
         {
-            string objmapn = Request.Form["tenpn"];
+            string objmapn = Request.Form["tenpx2"];
             string objmasp = Request.Form["tensp"];
             int objsoluong = Int32.Parse(Request.Form["soluong"]);
             double objdongia = double.Parse(Request.Form["dongia"]);
             CHITIETPHIEUXUAT temp = new CHITIETPHIEUXUAT { MAPX = objmapn, MASP = objmasp, SOLUONG = objsoluong, DONGIAXUAT = objdongia };
             db.CHITIETPHIEUXUATs.Add(temp);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            Session["tab1"] = "chitiet";
+            return RedirectToAction("Index1","PhieuXuat");
         }
 
 
@@ -49,7 +50,8 @@ namespace AutoStore.Controllers.System
             db.CHITIETPHIEUXUATs.Attach(temp);
             db.CHITIETPHIEUXUATs.Remove(temp);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            Session["tab1"] = "chitiet";
+            return RedirectToAction("Index1","PhieuXuat");
         }
 
         [HttpPost]
@@ -58,22 +60,12 @@ namespace AutoStore.Controllers.System
             var result = db.CHITIETPHIEUXUATs.SingleOrDefault(a => a.MAPX == id && a.MASP == idsp);
             if (result != null)
             {
-                //result.MAPX = Request.Form["tenpn"];
-                //result.MASP = Request.Form["tensp"];
                 result.SOLUONG = Int32.Parse(Request.Form["soluong"]);
                 result.DONGIAXUAT = double.Parse(Request.Form["dongia"]);
                 db.SaveChanges();
             }
-
-            //if(id=="")
-            //{
-
-
-            //    KHACHHANG temp = new KHACHHANG { MAKH = FuncClass.genNextCode(), TENKH = ten, DIACHI = adress, DIENTHOAI = phone, EMAIL = email };
-            //    db.KHACHHANGs.Add(temp);
-            //    db.SaveChanges();
-            //}
-            return RedirectToAction("Index");
+            Session["tab1"] = "chitiet";
+            return RedirectToAction("Index1","PhieuXuat");
         }
     }
 }

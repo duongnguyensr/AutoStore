@@ -18,6 +18,11 @@ namespace AutoStore.Controllers.System
             return View(db.PHIEUXUATs.ToList().OrderBy(a => a.MANV));
         }
 
+        public ActionResult Index1()
+        {
+            return View(db.PHIEUXUATs.ToList().OrderBy(a => a.MANV));
+        }
+
         public ActionResult getDataNHANVIEN()
         {
             var maNV = db.NHANVIENs.ToList().OrderBy(a => a.TENNV);
@@ -35,13 +40,14 @@ namespace AutoStore.Controllers.System
         {
             string objmanv = Request.Form["manv"];
             string obj = Request.Form["date"];
-            string objtenpn = Request.Form["tenpn"];
+            string objtenpn = Request.Form["tenpx"];
             DateTime objngaynhap = DateTime.ParseExact(obj, "d/M/yyyy", CultureInfo.InvariantCulture);
-            string objmakh = Request.Form["mancc"];
+            string objmakh = Request.Form["makh"];
             PHIEUXUAT temp = new PHIEUXUAT { MAPX = FuncClass.genNextCode(), TENPX=objtenpn, MANV = objmanv, NGAYXUAT = objngaynhap, MAKH = objmakh };
             db.PHIEUXUATs.Add(temp);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            Session.Remove("tab1");
+            return RedirectToAction("Index1");
         }
 
 
@@ -51,7 +57,8 @@ namespace AutoStore.Controllers.System
             db.PHIEUXUATs.Attach(temp);
             db.PHIEUXUATs.Remove(temp);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            Session.Remove("tab1");
+            return RedirectToAction("Index1");
         }
 
         [HttpPost]
@@ -62,13 +69,19 @@ namespace AutoStore.Controllers.System
             {
                 result.MANV = Request.Form["manv"];
                 string obj = FuncClass.ConvertDateTime(Request.Form["date"]);
-                result.TENPX = Request.Form["tenpn"];
+                result.TENPX = Request.Form["tenpx"];
                 result.NGAYXUAT = DateTime.ParseExact(obj, "d/M/yyyy", CultureInfo.InvariantCulture);
-                result.MAKH = Request.Form["mancc"];
+                result.MAKH = Request.Form["makh"];
                 db.SaveChanges();
             }
+            Session.Remove("tab1");
+            return RedirectToAction("Index1");
+        }
 
-            return RedirectToAction("Index");
+        public ActionResult GetChitietpx()
+        {
+            return View(db.CHITIETPHIEUXUATs.ToList().OrderBy(a => a.MASP));
+
         }
     }
 }

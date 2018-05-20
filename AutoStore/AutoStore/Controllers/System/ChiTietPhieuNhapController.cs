@@ -39,7 +39,8 @@ namespace AutoStore.Controllers
             CHITIETPHIEUNHAP temp = new CHITIETPHIEUNHAP { MAPN = objmapn, MASP = objmasp, SOLUONG = objsoluong, DONGIANHAP = objdongia};
             db.CHITIETPHIEUNHAPs.Add(temp);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            Session["tab"] = "chitiet";
+            return RedirectToAction("Index1","PhieuNhap");
         }
 
 
@@ -49,7 +50,8 @@ namespace AutoStore.Controllers
             db.CHITIETPHIEUNHAPs.Attach(temp);
             db.CHITIETPHIEUNHAPs.Remove(temp);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            Session["tab"] = "chitiet";
+            return RedirectToAction("Index1","PhieuNhap");
         }
 
         [HttpPost]
@@ -64,16 +66,11 @@ namespace AutoStore.Controllers
                 result.DONGIANHAP = double.Parse(Request.Form["dongia"]);
                 db.SaveChanges();
             }
+            Session["tab"] = "chitiet";
 
-            //if(id=="")
-            //{
-
-
-            //    KHACHHANG temp = new KHACHHANG { MAKH = FuncClass.genNextCode(), TENKH = ten, DIACHI = adress, DIENTHOAI = phone, EMAIL = email };
-            //    db.KHACHHANGs.Add(temp);
-            //    db.SaveChanges();
-            //}
-            return RedirectToAction("Index");
+            return RedirectToAction("Index1","PhieuNhap");
         }
+
+
     }
 }

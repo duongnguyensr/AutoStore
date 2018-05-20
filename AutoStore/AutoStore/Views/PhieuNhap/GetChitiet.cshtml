@@ -1,0 +1,62 @@
+﻿@model IEnumerable<AutoStore.Models.CHITIETPHIEUNHAP>
+    @{ 
+        Layout = null;
+    }
+
+<div class="x_title">
+    <h2>Chi tiết phiếu nhập<small>| Lưu trữ dữ liệu</small></h2>
+    @*<button type="button" style="margin-bottom:0px;margin-right:5px" class="btn btn-primary navbar-right">Tìm kiếm</button>*@
+    <button type="button" style="margin-bottom:0px;margin-right:5px" class="btn btn-primary navbar-right" data-toggle="modal" data-target="#insert2">Thêm mới</button>
+    <div class="clearfix"></div>
+</div>
+<div class="x_content">
+    <div id="datatable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <table id="datatable" class="table table-striped table-bordered dataTable no-footer jambo_table bulk_action" role="grid" aria-describedby="datatable_info">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center;width:80px">STT</th>
+                            <th>Tên phiếu nhập<i class="fa fa-sort pull-right"></i></th>
+                            <th>Mã sản phẩm<i class="fa fa-sort pull-right"></i></th>
+                            <th style="width: 300px;">Số lượng<i class="fa fa-sort pull-right"></i></th>
+                            <th style="width: 300px;">Đơn giá nhập<i class="fa fa-sort pull-right"></i></th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int count = 1; }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="text-align:center">
+                                    @count
+                                    @{ count += 1;}
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PHIEUNHAP.TENPN)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SANPHAM.TENSP)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SOLUONG)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DONGIANHAP)
+                                </td>
+                                <td>
+                                    <button type="button" style="margin-bottom:0px" class="btn btn-success btn-xs" onclick="javascript:DetailFunc2(@item.MAPN,'@item.MASP','@item.SOLUONG','@item.DONGIANHAP')">Chi tiết</button>
+                                    <button type="button" style="margin-bottom:0px" class="btn btn-warning btn-xs" onclick="javascript:setedit2(@item.MAPN,'@item.MASP','@item.SOLUONG','@item.DONGIANHAP')">Sửa</button>
+                                    <button type="button" style="margin-bottom:0px" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal2" onclick="javascript:confirmDelete2(@item.MAPN,'@item.MASP')">Xóa</button>
+                                </td>
+                            </tr>
+                                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

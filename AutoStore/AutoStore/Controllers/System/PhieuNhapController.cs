@@ -19,6 +19,12 @@ namespace AutoStore.Controllers.System
             return View(db.PHIEUNHAPs.ToList().OrderBy(a => a.TENPN));
         }
 
+        public ActionResult Index1()
+        {
+
+            return View(db.PHIEUNHAPs.ToList().OrderBy(a => a.TENPN));
+        }
+
         public ActionResult getDataNHANVIEN()
         {
             var maNV = db.NHANVIENs.ToList().OrderBy(a => a.TENNV);
@@ -42,7 +48,8 @@ namespace AutoStore.Controllers.System
             PHIEUNHAP temp = new PHIEUNHAP { MAPN = FuncClass.genNextCode(),TENPN = objtenpn, MANV = objmanv , NGAYNHAP=objngaynhap, MANCC = objmancc};
             db.PHIEUNHAPs.Add(temp);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            Session.Remove("tab");
+            return RedirectToAction("Index1");
         }
 
 
@@ -52,7 +59,8 @@ namespace AutoStore.Controllers.System
             db.PHIEUNHAPs.Attach(temp);
             db.PHIEUNHAPs.Remove(temp);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            Session.Remove("tab");
+            return RedirectToAction("Index1");
         }
 
         [HttpPost]
@@ -64,20 +72,24 @@ namespace AutoStore.Controllers.System
                 result.MANV = Request.Form["manv"];
                 result.TENPN = Request.Form["tenpn"];
                 string obj = FuncClass.ConvertDateTime(Request.Form["date"]);
-                result.NGAYNHAP = DateTime.ParseExact(obj, "d/M/yyyy", CultureInfo.InvariantCulture);
+                result.NGAYNHAP = DateTime.ParseExact(obj, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 result.MANCC = Request.Form["mancc"];
                 db.SaveChanges();
             }
-
-            //if(id=="")
-            //{
-
-
-            //    KHACHHANG temp = new KHACHHANG { MAKH = FuncClass.genNextCode(), TENKH = ten, DIACHI = adress, DIENTHOAI = phone, EMAIL = email };
-            //    db.KHACHHANGs.Add(temp);
-            //    db.SaveChanges();
-            //}
-            return RedirectToAction("Index");
+            Session.Remove("tab");
+            return RedirectToAction("Index1");
         }
+
+
+
+
+        public ActionResult GetChitiet()
+        {
+            return View(db.CHITIETPHIEUNHAPs.ToList().OrderBy(a => a.MASP));
+
+        }
+
+
+        
     }
 }
