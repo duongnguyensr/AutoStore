@@ -443,7 +443,39 @@
                 });
             });
 
+            function delitem(idkh,idsp) {
+                $.ajax({
+                    url: "/GioHang/delitem",
+                    data: {
+                        'idkh': idkh,
+                        'idsp': idsp
+                    },
+                    datatype: 'html',
+                    type: 'Get',
+                    success: function () {
+                        showcartfromdelitem();
+                    },
+                    error: function () {
+                       
+                    }
+                });
+            }
+
         
+            function showcartfromdelitem() {
+                $.ajax({
+                    url: "/GioHang/cart",
+
+                    type: 'Get',
+                    success: function (cart) {
+                        $("#cartmodalbody").html(cart);
+                        console.log("render cart thanh cong");
+
+                    },
+                    error: function () {
+                    }
+                });
+            }
 
     </script>
 

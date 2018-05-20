@@ -43,5 +43,23 @@ namespace AutoStore.Controllers.ClientService
             string clientuserid = (string)(Session["ClientUserID"]);
             return PartialView(db.GIOHANGs.Include("SANPHAM").Where(a => a.MAKH== clientuserid).ToList());
         }
+
+        public void delitem(string idkh,string idsp)
+        {
+            string clientuserid = (string)(Session["ClientUserID"]);
+            var temp = db.GIOHANGs.SingleOrDefault(a => a.MASP == idsp && a.MAKH == clientuserid);
+            if (temp != null)
+            {
+                if (temp.SOLUONG == 1)
+                {
+                    db.GIOHANGs.Remove(temp);
+                }
+                if (temp.SOLUONG > 1)
+                {
+                    temp.SOLUONG = temp.SOLUONG - 1;
+                }
+            }
+            db.SaveChanges();
+        }
     }
 }

@@ -28,7 +28,10 @@ namespace AutoStore.Controllers.ClientService
                 Session["UserName"] = obj.TENNV.ToString();
                 return RedirectToAction("Index", "Home");
             }
-            return View();
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
 
