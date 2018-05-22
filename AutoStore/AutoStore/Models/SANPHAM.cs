@@ -33,7 +33,7 @@ namespace AutoStore.Models
         public string MALOAI { get; set; }
 
         [Column(TypeName = "nvarchar")]
-        [StringLength(50)]
+        [StringLength(500)]
         public string MOTA { get; set; }
 
         [StringLength(1000)]

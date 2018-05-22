@@ -13,7 +13,8 @@ namespace AutoStore.Controllers.ClientService
         
         public ActionResult Index()
         {
-            return View();
+            string clientuserid = (string)(Session["ClientUserID"]);
+            return View(db.GIOHANGs.Include("SANPHAM").Where(a => a.MAKH == clientuserid).ToList());
         }
 
         public void AddToCart(string idsp)

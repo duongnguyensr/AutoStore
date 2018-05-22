@@ -1,0 +1,76 @@
+﻿@model IEnumerable<AutoStore.Models.GIOHANG>
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<link href="~/Content/ClientVender/css/cartcheckout.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+<section class="b-pageHeader">
+    <div class="container">
+        <h1 class="wow zoomInLeft" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: zoomInLeft;">Shopping Cart</h1>
+        <div class="b-pageHeader__search wow zoomInRight" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: zoomInRight;">
+            <h3>Checkout & get the best car you want!</h3>
+        </div>
+    </div>
+</section>
+
+
+   <div class="shopping-cart border" style="margin:15px 250px 150px 200px;">
+
+    <div class="column-labels">
+        <label class="product-image" style="padding-left:90px">Product</label>
+        <label class="product-details"style="padding-left:90px">Description</label>
+        <label class="product-price" style="padding-left:30px">Price</label>
+        <label class="product-quantity">Quantity</label>
+        <label class="product-removal" >Remove</label>
+        <label class="product-line-price" style="padding-right:30px">Total</label>
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="product">
+            <div class="product-image">
+                <img src="@item.SANPHAM.HINHANH">
+            </div>
+            <div class="product-details">
+                <div class="product-title"><h5 style="font:700 16px 'Open Sans',sans-serif;">@item.SANPHAM.TENSP</h5></div>
+                <p class="product-description"><h5 style="font:100 14px 'Open Sans',sans-serif;margin-right:20px">@item.SANPHAM.MOTA</h5></p>
+            </div>
+            <div class="product-price b-featured__item-price" style="width:90px;margin-right:50px">@item.SANPHAM.DONGIA</div>
+            <div class="product-quantity">
+                <input type="number" value="2" min="1">
+            </div>
+            <div class="product-removal" style="margin-left:10px">
+                <button class="remove-product">
+                    x
+                </button>
+            </div>
+            <div class="product-line-price b-featured__item-price" style="width:90px;margin-left:40px">25.98</div>
+        </div>
+    }
+
+
+    <div class="totals product">
+        <div class="totals-item">
+            <label>Subtotal</label>
+            <div class="totals-value" id="cart-subtotal">71.97</div>
+        </div>
+        <div class="totals-item">
+            <label>Tax (5%)</label>
+            <div class="totals-value" id="cart-tax">3.60</div>
+        </div>
+        <div class="totals-item">
+            <label>Shipping</label>
+            <div class="totals-value" id="cart-shipping">15.00</div>
+        </div>
+        <div class="totals-item totals-item-total">
+            <label>Grand Total</label>
+            <div class="totals-value" id="cart-total">90.57</div>
+        </div>
+    </div>
+
+       <div class="b-search__main-form-submit">
+           <button class="btn m-btn">Checkout<span class="fa fa-shopping-cart"></span></button>
+       </div>
+
+</div>
