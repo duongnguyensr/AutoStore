@@ -202,6 +202,6 @@ C:\Users\Duong Nguyen Jr\Project\AutoStore\trunk\AutoStore\AutoStore\bin\Microso
 C:\Users\Duong Nguyen Jr\Project\AutoStore\trunk\AutoStore\AutoStore\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Duong Nguyen Jr\Project\AutoStore\trunk\AutoStore\AutoStore\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Duong Nguyen Jr\Project\AutoStore\trunk\AutoStore\AutoStore\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Duong Nguyen Jr\Project\AutoStore\trunk\AutoStore\AutoStore\obj\Debug\AutoStore.csprojResolveAssemblyReference.cache
 C:\Users\Duong Nguyen Jr\Project\AutoStore\trunk\AutoStore\AutoStore\obj\Debug\AutoStore.dll
 C:\Users\Duong Nguyen Jr\Project\AutoStore\trunk\AutoStore\AutoStore\obj\Debug\AutoStore.pdb
+C:\Users\Duong Nguyen Jr\Project\AutoStore\trunk\AutoStore\AutoStore\obj\Debug\AutoStore.csprojResolveAssemblyReference.cache

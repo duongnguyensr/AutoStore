@@ -52,6 +52,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -167,28 +169,34 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClientService\ClientLoginController.cs" />
+    <Compile Include="Controllers\ClientService\GioHangController.cs" />
     <Compile Include="Controllers\ClientService\LoginAdminController.cs" />
     <Compile Include="Controllers\ClientService\WelcomeController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\System\HomeController.cs" />
     <Compile Include="Controllers\SessionTimeoutAttributeController.cs" />
     <Compile Include="Controllers\ClientService\ShopController.cs" />
+    <Compile Include="Controllers\System\ChiTietPhieuNhapController.cs" />
+    <Compile Include="Controllers\System\ChiTietPhieuXuatController.cs" />
     <Compile Include="Controllers\System\KhachHangController.cs" />
+    <Compile Include="Controllers\System\LoaiSanPhamController.cs" />
     <Compile Include="Controllers\System\NhaCungCapController.cs" />
     <Compile Include="Controllers\System\NhanVienController.cs" />
+    <Compile Include="Controllers\System\NhaSanXuatController.cs" />
+    <Compile Include="Controllers\System\PhieuNhapController.cs" />
+    <Compile Include="Controllers\System\PhieuXuatController.cs" />
+    <Compile Include="Controllers\System\SanPhamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CHITIETPHIEUNHAP.cs" />
     <Compile Include="Models\CHITIETPHIEUXUAT.cs" />
     <Compile Include="Models\DBConnection.cs" />
     <Compile Include="Models\FuncClass.cs" />
+    <Compile Include="Models\GIOHANG.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\KHACHHANG.cs" />
     <Compile Include="Models\LOAISANPHAM.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NHACUNGCAP.cs" />
     <Compile Include="Models\NHANVIEN.cs" />
     <Compile Include="Models\NHASANXUAT.cs" />
@@ -206,7 +214,6 @@
     <Content Include="Content\vendors\validator\index.html" />
     <Content Include="Content\vendors\validator\multifield.js" />
     <Content Include="Content\vendors\validator\validator.js" />
-    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
@@ -244,24 +251,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\KhachHang\Index.cshtml" />
@@ -271,6 +260,29 @@
     <Content Include="Views\Shared\_AdminLoginLayout.cshtml" />
     <Content Include="Views\NhanVien\Index.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
+    <Content Include="Views\GioHang\cart.cshtml" />
+    <Content Include="Views\ChiTietPhieuNhap\getDataPHIEUNHAP.cshtml" />
+    <Content Include="Views\ChiTietPhieuNhap\getDataSANPHAM.cshtml" />
+    <Content Include="Views\ChiTietPhieuNhap\Index.cshtml" />
+    <Content Include="Views\ChiTietPhieuXuat\getDataPHIEUXUAT.cshtml" />
+    <Content Include="Views\ChiTietPhieuXuat\getDataSANPHAM.cshtml" />
+    <Content Include="Views\ChiTietPhieuXuat\Index.cshtml" />
+    <Content Include="Views\LoaiSanPham\Index.cshtml" />
+    <Content Include="Views\NhaSanXuat\Index.cshtml" />
+    <Content Include="Views\PhieuNhap\getDataNHACUNGCAP.cshtml" />
+    <Content Include="Views\PhieuNhap\getDataNHANVIEN.cshtml" />
+    <Content Include="Views\PhieuNhap\Index.cshtml" />
+    <Content Include="Views\PhieuXuat\getDataKHACHHANG.cshtml" />
+    <Content Include="Views\PhieuXuat\getDataNHANVIEN.cshtml" />
+    <Content Include="Views\PhieuXuat\Index.cshtml" />
+    <Content Include="Views\SanPham\Index.cshtml" />
+    <Content Include="Views\SanPham\getDataLOAISANPHAM.cshtml" />
+    <Content Include="Views\SanPham\getDataNHASANXUAT.cshtml" />
+    <Content Include="Views\PhieuNhap\Index1.cshtml" />
+    <Content Include="Views\PhieuNhap\GetChitiet.cshtml" />
+    <Content Include="Views\PhieuXuat\Index1.cshtml" />
+    <Content Include="Views\PhieuXuat\GetChitietpx.cshtml" />
+    <Content Include="Views\GioHang\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -281,6 +293,7 @@
     <Folder Include="Content\ClientVender\js\" />
     <Folder Include="Content\ClientVender\media\" />
     <Folder Include="Content\images\" />
+    <Folder Include="Views\ClientLogin\" />
     <Folder Include="Views\SessionTimeoutAttribute\" />
   </ItemGroup>
   <ItemGroup>
@@ -289,7 +302,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <PropertyGroup>
