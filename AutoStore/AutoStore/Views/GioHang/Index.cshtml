@@ -38,14 +38,15 @@
             </div>
             <div class="product-price b-featured__item-price" style="width:90px;margin-right:50px">@item.SANPHAM.DONGIA</div>
             <div class="product-quantity">
-                <input type="number" value="2" min="1">
+                <button onclick="decrease(@item.MAKH@item.MASP,'@item.SANPHAM.DONGIA','@item.MASP')">-</button>
+                <input type="number" id="NB_@item.MAKH@item.MASP" style="width:25px" value="@item.SOLUONG" min="1">
+                <button onclick="increase(@item.MAKH@item.MASP,'@item.SANPHAM.DONGIA','@item.MASP')">+</button>
             </div>
             <div class="product-removal" style="margin-left:10px">
-                <button class="remove-product">
-                    x
-                </button>
+                <button class="btn btn-round btn-danger fa fa-trash"></button>
             </div>
-            <div class="product-line-price b-featured__item-price" style="width:90px;margin-left:40px">25.98</div>
+            @{ var temp = item.SOLUONG * item.SANPHAM.DONGIA;}
+            <div class="product-line-price b-featured__item-price" style="width:90px;margin-left:40px" id="gia_@item.MAKH@item.MASP">@temp</div>
         </div>
     }
 
@@ -54,10 +55,6 @@
         <div class="totals-item">
             <label>Subtotal</label>
             <div class="totals-value" id="cart-subtotal">71.97</div>
-        </div>
-        <div class="totals-item">
-            <label>Tax (5%)</label>
-            <div class="totals-value" id="cart-tax">3.60</div>
         </div>
         <div class="totals-item">
             <label>Shipping</label>
@@ -74,3 +71,75 @@
        </div>
 
 </div>
+
+
+<script type="text/javascript">
+    function decrease(nbid,gia,idsp) {
+        var i=$("#NB_"+nbid+"").val();
+        if(i>1){
+            $('#NB_'+nbid+'').val(i-1);
+            i=i-1;
+            gia=gia*i;
+            $('#gia_'+nbid+'').text(gia);
+
+            $.ajax({
+                url: "/GioHang/decrease",
+                data: {
+                    'i': i,
+                    'idsp':idsp
+                },
+                datatype: 'html',
+                type: 'Get',
+                success: function () {
+                    console.log("xoa thanh cong");
+                    
+                },
+                error: function () {
+                    $("#err_").attr("style", "display:normal");
+                }
+            });
+        }
+        
+    }
+
+        function increase(nbid,gia,idsp) {
+            var i=$("#NB_"+nbid+"").val();
+            if(i>0){
+                var y=parseInt(i)+1;
+                $('#NB_'+nbid+'').val(y);
+               
+                gia=gia*y;
+                $('#gia_'+nbid+'').text(gia);
+
+                $.ajax({
+                    url: "/GioHang/decrease",
+                    data: {
+                        'i': y,
+                        'idsp':idsp
+                    },
+                    datatype: 'html',
+                    type: 'Get',
+                    success: function () {
+                        console.log("xoa thanh cong");
+                    
+                    },
+                    error: function () {
+                        $("#err_").attr("style", "display:normal");
+                    }
+                });
+            }
+
+        }
+    
+</script>
+<style>
+    input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+</style>

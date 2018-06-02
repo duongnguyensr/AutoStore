@@ -62,5 +62,18 @@ namespace AutoStore.Controllers.ClientService
             }
             db.SaveChanges();
         }
+
+        public void decrease(int i,string idsp)
+        {
+            string clientuserid = (string)(Session["ClientUserID"]);
+            var cartItem = db.GIOHANGs.SingleOrDefault(a => a.MASP == idsp && a.MAKH == clientuserid);
+            if (cartItem != null)
+            {
+                cartItem.SOLUONG = i;
+                db.SaveChanges();
+            }
+        }
+
+        
     }
 }
