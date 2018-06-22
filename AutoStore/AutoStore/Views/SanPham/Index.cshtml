@@ -43,6 +43,7 @@
                                         <th style="width: 100px;">Đơn giá</th>
                                         <th style="width: 100px;">Số lượng</th>
                                         <th style="width: 250px;">Mô tả</th>
+                                        <th style="width: 50px;">Ảnh</th>
                                         <th>Chức năng</th>
                                     </tr>
                                 </thead>
@@ -50,38 +51,42 @@
                                     @{int count = 1; }
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <td style="text-align:center">
-                                                @count
-                                                @{ count += 1;}
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.TENSP)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.NHASANXUAT.TENNSX)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.MAUSAC)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.LOAISANPHAM.TENLOAI)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.DONGIA)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.SOLUONG)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.MOTA)
-                                            </td>
-                                            <td>
-                                                <button type="button" style="margin-bottom:0px" class="btn btn-success btn-xs" onclick="javascript:DetailFunc(@item.MASP,'@item.TENSP','@item.MANSX','@item.MAUSAC','@item.MALOAI','@item.MOTA','@item.DONGIA','@item.SOLUONG','@item.YEAR','@item.KM')">Chi tiết</button>
-                                                <button type="button" style="margin-bottom:0px" class="btn btn-warning btn-xs" onclick="javascript:setedit(@item.MASP,'@item.TENSP','@item.MANSX','@item.MAUSAC','@item.MALOAI','@item.MOTA','@item.DONGIA','@item.SOLUONG','@item.YEAR','@item.KM')">Sửa</button>
-                                                <button type="button" style="margin-bottom:0px" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" onclick="javascript:confirmDelete(@item.MASP,'@item.TENSP')">Xóa</button>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            @count
+                                            @{ count += 1;}
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TENSP)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NHASANXUAT.TENNSX)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MAUSAC)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.LOAISANPHAM.TENLOAI)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DONGIA)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SOLUONG)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MOTA)
+                                        </td>
+                                        <td>
+                                            <img src=" @Html.DisplayFor(modelItem => item.HINHANH)" alt="@item.TENSP" width="186" height="113">
+                                          
+                                        </td>
+                                        <td>
+                                            <button type="button" style="margin-bottom:0px" class="btn btn-success btn-xs" onclick="javascript:DetailFunc(@item.MASP,'@item.TENSP','@item.MANSX','@item.MAUSAC','@item.MALOAI','@item.MOTA','@item.DONGIA','@item.SOLUONG','@item.YEAR','@item.KM')">Chi tiết</button>
+                                            <button type="button" style="margin-bottom:0px" class="btn btn-warning btn-xs" onclick="javascript:setedit(@item.MASP,'@item.TENSP','@item.MANSX','@item.MAUSAC','@item.MALOAI','@item.MOTA','@item.DONGIA','@item.SOLUONG','@item.YEAR','@item.KM')">Sửa</button>
+                                            <button type="button" style="margin-bottom:0px" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" onclick="javascript:confirmDelete(@item.MASP,'@item.TENSP')">Xóa</button>
+                                        </td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>
@@ -110,103 +115,112 @@
                 <div class="modal-body">
 
                 </div>
-                @using (Html.BeginForm("Insert", "SanPham"))
+                @using (Html.BeginForm("Insert", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
-                    <div class="form-horizontal form-label-left" novalidate>
+                <div class="form-horizontal form-label-left" novalidate>
 
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tensp">
-                                Tên sản phẩm <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="tensp" class="form-control col-md-7 col-xs-12" name="tensp" placeholder="Tên sản phẩm" type="text">
-                            </div>
-                        </div>
-
-
-
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
-                                Tên nhà sản xuất <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select name="mansx" class="form-control col-md-7 col-xs-12" placeholder="Chọn nhân viên" required="required" id="mansx">@Html.Action("getDataNHASANXUAT", "SanPham")</select>
-                            </div>
-                        </div>
-
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tensp">
-                                Màu sắc <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="mausac" class="form-control col-md-7 col-xs-12" name="mausac" placeholder="màu sản phẩm" type="text">
-                            </div>
-                        </div>
-
-
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
-                                Tên loại sản phẩm <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select name="maloai" class="form-control col-md-7 col-xs-12" placeholder="Chọn nhân viên" required="required" id="maloai">@Html.Action("getDataLOAISANPHAM", "SanPham")</select>
-                            </div>
-                        </div>
-
-
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">
-                                Mô tả <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <textarea id="mota" placeholder="mô tả" required="required" name="mota" class="form-control col-md-7 col-xs-12"></textarea>
-                            </div>
-                        </div>
-
-
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tensp">
-                                Đơn giá <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="dongia" class="form-control col-md-7 col-xs-12" name="dongia" placeholder="đơn giá" type="text">
-                            </div>
-                        </div>
-
-
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tensp">
-                                Số lượng <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="soluong" class="form-control col-md-7 col-xs-12" name="soluong" placeholder="số lượng" type="text">
-                            </div>
-                        </div>
-
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tensp">
-                                Năm <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="nam" class="form-control col-md-7 col-xs-12" name="nam" placeholder="năm sản xuất" type="text">
-                            </div>
-                        </div>
-
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tensp">
-                                Số KM <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="km" class="form-control col-md-7 col-xs-12" name="km" placeholder="số km" type="text">
-                            </div>
-                        </div>
-
-
-                        <div class="modal-footer">
-                            <button type="button" onclick="emptyvalue()" class="btn btn-default" data-dismiss="modal">Bỏ qua</button>
-                            <button id="send" type="submit" class="btn btn-primary">Lưu trữ</button>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tensp">
+                            Tên sản phẩm <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="tensp" class="form-control col-md-7 col-xs-12" name="tensp" placeholder="Tên sản phẩm" type="text">
                         </div>
                     </div>
+
+
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                            Tên nhà sản xuất <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="mansx" class="form-control col-md-7 col-xs-12" placeholder="Chọn nhân viên" required="required" id="mansx">@Html.Action("getDataNHASANXUAT", "SanPham")</select>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tensp">
+                            Màu sắc <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="mausac" class="form-control col-md-7 col-xs-12" name="mausac" placeholder="màu sản phẩm" type="text">
+                        </div>
+                    </div>
+
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                            Tên loại sản phẩm <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="maloai" class="form-control col-md-7 col-xs-12" placeholder="Chọn nhân viên" required="required" id="maloai">@Html.Action("getDataLOAISANPHAM", "SanPham")</select>
+                        </div>
+                    </div>
+
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">
+                            Mô tả <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <textarea id="mota" placeholder="mô tả" required="required" name="mota" class="form-control col-md-7 col-xs-12"></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tensp">
+                            Đơn giá <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="dongia" class="form-control col-md-7 col-xs-12" name="dongia" placeholder="đơn giá" type="text">
+                        </div>
+                    </div>
+
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tensp">
+                            Số lượng <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="soluong" class="form-control col-md-7 col-xs-12" name="soluong" placeholder="số lượng" type="text">
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tensp">
+                            Năm <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="nam" class="form-control col-md-7 col-xs-12" name="nam" placeholder="năm sản xuất" type="text">
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tensp">
+                            Số KM <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="km" class="form-control col-md-7 col-xs-12" name="km" placeholder="số km" type="text">
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tensp">
+                            Chọn ảnh<span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="anh" class="form-control col-md-7 col-xs-12" name="anh" placeholder="Hình ảnh" type="file">
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" onclick="emptyvalue()" class="btn btn-default" data-dismiss="modal">Bỏ qua</button>
+                        <button id="send" type="submit" class="btn btn-primary">Lưu trữ</button>
+                    </div>
+                </div>
                 }
             </div>
         </div>
@@ -230,7 +244,7 @@
                 <div class="modal-body">
 
                 </div>
-                @using (Html.BeginForm("update", "SanPham", new { idpn = "6" }, FormMethod.Post, new { @id = "formupdate" }))
+                @using (Html.BeginForm("update", "SanPham", new { idpn = "6" }, FormMethod.Post, new { @id = "formupdate", enctype = "multipart/form-data" }))
                 {
                 <div class="form-horizontal form-label-left" novalidate>
 
@@ -318,6 +332,23 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <input id="kmedit" class="form-control col-md-7 col-xs-12" name="km" placeholder="số km" type="text">
+                        </div>
+                    </div>
+
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tensp">
+                            Chọn ảnh<span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            
+                            <input id="anhedit" class="form-control col-md-7 col-xs-12" name="anh" placeholder="file name" type="file">
+                            @*<div class="input-group">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" onclick="document.getElementById('anhedit').click();">Browser</button>
+                                </span>
+                                <input type="text" id="textanhedit"  name="anh" class="form-control"  placeholder="File path">
+                            </div>*@
                         </div>
                     </div>
 
@@ -453,5 +484,14 @@
         $("#nam").prop('disabled', false);
         $("#km").prop('disabled', false);
     }
+
+
+    $("#anhedit").change(function (event) {
+        //var x = document.getElementById("anhedit").mozFullPath;
+        console.log(this.files[0].mozFullPath);
+       
+        //alert(x);
+    })
+            
 
 </script>
