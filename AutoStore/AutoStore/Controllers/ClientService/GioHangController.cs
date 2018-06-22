@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AutoStore.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AutoStore.Models;
 
 namespace AutoStore.Controllers.ClientService
 {
     public class GioHangController : Controller
     {
-        DBConnection db = new DBConnection();
-        
+        private DBConnection db = new DBConnection();
+
         public ActionResult Index()
         {
             string clientuserid = (string)(Session["ClientUserID"]);
@@ -19,21 +16,16 @@ namespace AutoStore.Controllers.ClientService
 
         public void AddToCart(string idsp)
         {
-
             string clientuserid = (string)(Session["ClientUserID"]);
-            var cartItem = db.GIOHANGs.SingleOrDefault(a =>  a.MASP == idsp && a.MAKH==clientuserid);
+            var cartItem = db.GIOHANGs.SingleOrDefault(a => a.MASP == idsp && a.MAKH == clientuserid);
             if (cartItem == null)
             {
-                GIOHANG temp = new GIOHANG { CODE = FuncClass.genNextCode(), MAKH = clientuserid, MASP = idsp, SOLUONG = 1};
+                GIOHANG temp = new GIOHANG { CODE = FuncClass.genNextCode(), MAKH = clientuserid, MASP = idsp, SOLUONG = 1 };
                 db.GIOHANGs.Add(temp);
-               
             }
             else
             {
-                
-                
                 cartItem.SOLUONG = cartItem.SOLUONG + 1;
-
             }
             // Save changes
             db.SaveChanges();
@@ -42,10 +34,10 @@ namespace AutoStore.Controllers.ClientService
         public ActionResult cart()
         {
             string clientuserid = (string)(Session["ClientUserID"]);
-            return PartialView(db.GIOHANGs.Include("SANPHAM").Where(a => a.MAKH== clientuserid).ToList());
+            return PartialView(db.GIOHANGs.Include("SANPHAM").Where(a => a.MAKH == clientuserid).ToList());
         }
 
-        public void delitem(string idkh,string idsp)
+        public void delitem(string idkh, string idsp)
         {
             string clientuserid = (string)(Session["ClientUserID"]);
             var temp = db.GIOHANGs.SingleOrDefault(a => a.MASP == idsp && a.MAKH == clientuserid);
@@ -63,7 +55,7 @@ namespace AutoStore.Controllers.ClientService
             db.SaveChanges();
         }
 
-        public void decrease(int i,string idsp)
+        public void decrease(int i, string idsp)
         {
             string clientuserid = (string)(Session["ClientUserID"]);
             var cartItem = db.GIOHANGs.SingleOrDefault(a => a.MASP == idsp && a.MAKH == clientuserid);
@@ -73,7 +65,5 @@ namespace AutoStore.Controllers.ClientService
                 db.SaveChanges();
             }
         }
-
-        
     }
 }

@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AutoStore.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AutoStore.Models;
 
 namespace AutoStore.Controllers.System
 {
     [SessionTimeout]
     public class NhanVienController : Controller
     {
-        DBConnection db = new DBConnection();
+        private DBConnection db = new DBConnection();
+
         public ActionResult Index()
         {
-
             return View(db.NHANVIENs.ToList().OrderBy(a => a.TENNV));
         }
 
@@ -32,7 +29,6 @@ namespace AutoStore.Controllers.System
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
 
         public ActionResult Delete(string ID)
         {
@@ -61,8 +57,6 @@ namespace AutoStore.Controllers.System
 
             //if(id=="")
             //{
-
-
             //    KHACHHANG temp = new KHACHHANG { MAKH = FuncClass.genNextCode(), TENKH = ten, DIACHI = adress, DIENTHOAI = phone, EMAIL = email };
             //    db.KHACHHANGs.Add(temp);
             //    db.SaveChanges();

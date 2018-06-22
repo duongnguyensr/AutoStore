@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AutoStore.Models;
+using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AutoStore.Models;
 
 namespace AutoStore.Controllers.System
 {
     [SessionTimeout]
     public class ChiTietPhieuXuatController : Controller
     {
-        DBConnection db = new DBConnection();
+        private DBConnection db = new DBConnection();
 
         public ActionResult Index()
         {
@@ -25,7 +23,6 @@ namespace AutoStore.Controllers.System
 
         public ActionResult getDataSANPHAM()
         {
-            
             return View(db.SANPHAMs.ToList().OrderBy(a => a.TENSP));
         }
 
@@ -40,9 +37,8 @@ namespace AutoStore.Controllers.System
             db.CHITIETPHIEUXUATs.Add(temp);
             db.SaveChanges();
             Session["tab1"] = "chitiet";
-            return RedirectToAction("Index1","PhieuXuat");
+            return RedirectToAction("Index1", "PhieuXuat");
         }
-
 
         public ActionResult Delete(string ID, string IDSP)
         {
@@ -51,7 +47,7 @@ namespace AutoStore.Controllers.System
             db.CHITIETPHIEUXUATs.Remove(temp);
             db.SaveChanges();
             Session["tab1"] = "chitiet";
-            return RedirectToAction("Index1","PhieuXuat");
+            return RedirectToAction("Index1", "PhieuXuat");
         }
 
         [HttpPost]
@@ -65,7 +61,7 @@ namespace AutoStore.Controllers.System
                 db.SaveChanges();
             }
             Session["tab1"] = "chitiet";
-            return RedirectToAction("Index1","PhieuXuat");
+            return RedirectToAction("Index1", "PhieuXuat");
         }
     }
 }

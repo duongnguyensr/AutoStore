@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AutoStore.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AutoStore.Models;
 
 namespace AutoStore.Controllers.System
 {
@@ -11,11 +8,11 @@ namespace AutoStore.Controllers.System
     public class KhachHangController : Controller
     {
         // GET: KhachHang
-        DBConnection db = new DBConnection();
+        private DBConnection db = new DBConnection();
+
         public ActionResult Index()
         {
-
-            return View(db.KHACHHANGs.ToList().OrderBy(a=>a.TENKH));
+            return View(db.KHACHHANGs.ToList().OrderBy(a => a.TENKH));
         }
 
         [HttpPost]
@@ -30,7 +27,6 @@ namespace AutoStore.Controllers.System
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
 
         public ActionResult Delete(string ID)
         {
@@ -54,7 +50,6 @@ namespace AutoStore.Controllers.System
                 db.SaveChanges();
             }
 
-          
             return RedirectToAction("Index");
         }
     }

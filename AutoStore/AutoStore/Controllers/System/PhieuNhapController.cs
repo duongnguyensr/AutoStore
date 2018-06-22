@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using AutoStore.Models;
+﻿using AutoStore.Models;
+using System;
 using System.Globalization;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace AutoStore.Controllers.System
 {
     [SessionTimeout]
     public class PhieuNhapController : Controller
     {
+        private DBConnection db = new DBConnection();
 
-        DBConnection db = new DBConnection();
         public ActionResult Index()
         {
-
             return View(db.PHIEUNHAPs.ToList().OrderBy(a => a.TENPN));
         }
 
         public ActionResult Index1()
         {
-
             return View(db.PHIEUNHAPs.ToList().OrderBy(a => a.TENPN));
         }
 
@@ -45,13 +41,12 @@ namespace AutoStore.Controllers.System
 
             DateTime objngaynhap = DateTime.ParseExact(Request.Form["date"], "dd/MM/yyyy", CultureInfo.InvariantCulture);
             string objmancc = Request.Form["mancc"];
-            PHIEUNHAP temp = new PHIEUNHAP { MAPN = FuncClass.genNextCode(),TENPN = objtenpn, MANV = objmanv , NGAYNHAP=objngaynhap, MANCC = objmancc};
+            PHIEUNHAP temp = new PHIEUNHAP { MAPN = FuncClass.genNextCode(), TENPN = objtenpn, MANV = objmanv, NGAYNHAP = objngaynhap, MANCC = objmancc };
             db.PHIEUNHAPs.Add(temp);
             db.SaveChanges();
             Session.Remove("tab");
             return RedirectToAction("Index1");
         }
-
 
         public ActionResult Delete(string ID)
         {
@@ -80,16 +75,9 @@ namespace AutoStore.Controllers.System
             return RedirectToAction("Index1");
         }
 
-
-
-
         public ActionResult GetChitiet()
         {
             return View(db.CHITIETPHIEUNHAPs.ToList().OrderBy(a => a.MASP));
-
         }
-
-
-        
     }
 }

@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AutoStore.Models;
+using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AutoStore.Models;
 
 namespace AutoStore.Controllers
 {
     [SessionTimeout]
     public class ChiTietPhieuNhapController : Controller
     {
-        DBConnection db = new DBConnection();
+        private DBConnection db = new DBConnection();
 
         public ActionResult Index()
         {
@@ -36,28 +34,27 @@ namespace AutoStore.Controllers
             string objmasp = Request.Form["tensp"];
             int objsoluong = Int32.Parse(Request.Form["soluong"]);
             double objdongia = double.Parse(Request.Form["dongia"]);
-            CHITIETPHIEUNHAP temp = new CHITIETPHIEUNHAP { MAPN = objmapn, MASP = objmasp, SOLUONG = objsoluong, DONGIANHAP = objdongia};
+            CHITIETPHIEUNHAP temp = new CHITIETPHIEUNHAP { MAPN = objmapn, MASP = objmasp, SOLUONG = objsoluong, DONGIANHAP = objdongia };
             db.CHITIETPHIEUNHAPs.Add(temp);
             db.SaveChanges();
             Session["tab"] = "chitiet";
-            return RedirectToAction("Index1","PhieuNhap");
+            return RedirectToAction("Index1", "PhieuNhap");
         }
 
-
-        public ActionResult Delete(string ID,string IDSP)
+        public ActionResult Delete(string ID, string IDSP)
         {
-            var temp = new CHITIETPHIEUNHAP { MAPN = ID, MASP = IDSP};
+            var temp = new CHITIETPHIEUNHAP { MAPN = ID, MASP = IDSP };
             db.CHITIETPHIEUNHAPs.Attach(temp);
             db.CHITIETPHIEUNHAPs.Remove(temp);
             db.SaveChanges();
             Session["tab"] = "chitiet";
-            return RedirectToAction("Index1","PhieuNhap");
+            return RedirectToAction("Index1", "PhieuNhap");
         }
 
         [HttpPost]
-        public ActionResult update(string id,string idsp)
+        public ActionResult update(string id, string idsp)
         {
-            var result = db.CHITIETPHIEUNHAPs.SingleOrDefault(a=>a.MAPN == id && a.MASP == idsp);
+            var result = db.CHITIETPHIEUNHAPs.SingleOrDefault(a => a.MAPN == id && a.MASP == idsp);
             if (result != null)
             {
                 //result.MAPN = Request.Form["tenpn"];
@@ -68,9 +65,7 @@ namespace AutoStore.Controllers
             }
             Session["tab"] = "chitiet";
 
-            return RedirectToAction("Index1","PhieuNhap");
+            return RedirectToAction("Index1", "PhieuNhap");
         }
-
-
     }
 }

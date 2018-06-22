@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AutoStore.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AutoStore.Models;
 
 namespace AutoStore.Controllers.System
 {
     [SessionTimeout]
     public class LoaiSanPhamController : Controller
     {
-        DBConnection db = new DBConnection();
+        private DBConnection db = new DBConnection();
 
         public ActionResult Index()
         {
@@ -22,13 +19,12 @@ namespace AutoStore.Controllers.System
         {
             string objname = Request.Form["name"];
             string objmota = Request.Form["mota"];
-    
-            LOAISANPHAM temp = new LOAISANPHAM { MALOAI = FuncClass.genNextCode(), TENLOAI = objname, MOTA = objmota};
+
+            LOAISANPHAM temp = new LOAISANPHAM { MALOAI = FuncClass.genNextCode(), TENLOAI = objname, MOTA = objmota };
             db.LOAISANPHAMs.Add(temp);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
 
         public ActionResult Delete(string ID)
         {
@@ -47,14 +43,12 @@ namespace AutoStore.Controllers.System
             {
                 result.TENLOAI = Request.Form["name"];
                 result.MOTA = Request.Form["mota"];
-                
+
                 db.SaveChanges();
             }
 
             //if(id=="")
             //{
-
-
             //    KHACHHANG temp = new KHACHHANG { MAKH = FuncClass.genNextCode(), TENKH = ten, DIACHI = adress, DIENTHOAI = phone, EMAIL = email };
             //    db.KHACHHANGs.Add(temp);
             //    db.SaveChanges();
