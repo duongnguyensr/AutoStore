@@ -42,8 +42,8 @@ namespace AutoStore.Controllers.System
         {
             string objmanv = Request.Form["manv"];
             string objtenpn = Request.Form["tenpn"];
-            string obj = Request.Form["date"];
-            DateTime objngaynhap = DateTime.ParseExact(obj, "d/M/yyyy", CultureInfo.InvariantCulture);
+
+            DateTime objngaynhap = DateTime.ParseExact(Request.Form["date"], "dd/MM/yyyy", CultureInfo.InvariantCulture);
             string objmancc = Request.Form["mancc"];
             PHIEUNHAP temp = new PHIEUNHAP { MAPN = FuncClass.genNextCode(),TENPN = objtenpn, MANV = objmanv , NGAYNHAP=objngaynhap, MANCC = objmancc};
             db.PHIEUNHAPs.Add(temp);
@@ -71,8 +71,8 @@ namespace AutoStore.Controllers.System
             {
                 result.MANV = Request.Form["manv"];
                 result.TENPN = Request.Form["tenpn"];
-                string obj = FuncClass.ConvertDateTime(Request.Form["date"]);
-                result.NGAYNHAP = DateTime.ParseExact(obj, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                //string obj = FuncClass.ConvertDateTime(Request.Form["date"]);
+                result.NGAYNHAP = DateTime.ParseExact(Request.Form["date"], "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 result.MANCC = Request.Form["mancc"];
                 db.SaveChanges();
             }
