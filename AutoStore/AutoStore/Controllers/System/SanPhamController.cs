@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AutoStore.Models;
+using System;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using AutoStore.Models;
-using System.IO;
 
 namespace AutoStore.Controllers.System
 {
     [SessionTimeout]
     public class SanPhamController : Controller
     {
-        DBConnection db = new DBConnection();
+        private DBConnection db = new DBConnection();
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View(db.SANPHAMs.ToList().OrderBy(a => a.TENSP));
@@ -30,11 +33,16 @@ namespace AutoStore.Controllers.System
             return View(maNCC);
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="anh"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Insert(HttpPostedFileBase anh)
         {
             string objtensp = Request.Form["tensp"];
-            var check = db.SANPHAMs.SingleOrDefault(a => a.TENSP==objtensp);
+            var check = db.SANPHAMs.SingleOrDefault(a => a.TENSP == objtensp);
             if (check == null)
             {
                 string objmansx = Request.Form["mansx"];
@@ -54,19 +62,13 @@ namespace AutoStore.Controllers.System
                                            Server.MapPath("~/Content/ClientVender/media/186x113"), pic);
                     // file is uploaded
                     anh.SaveAs(path);
-
-
-
                 }
-                SANPHAM temp = new SANPHAM { MASP = FuncClass.genNextCode(), TENSP = objtensp, MANSX = objmansx, MAUSAC = objmausac, MALOAI = objmaloai, MOTA = objmota, DONGIA = objdongia, SOLUONG = objsoluong, YEAR = objnam, KM = objkm,HINHANH=objanh };
+                SANPHAM temp = new SANPHAM { MASP = FuncClass.genNextCode(), TENSP = objtensp, MANSX = objmansx, MAUSAC = objmausac, MALOAI = objmaloai, MOTA = objmota, DONGIA = objdongia, SOLUONG = objsoluong, YEAR = objnam, KM = objkm, HINHANH = objanh };
                 db.SANPHAMs.Add(temp);
                 db.SaveChanges();
-               
             }
             return RedirectToAction("Index");
-
         }
-
 
         public ActionResult Delete(string ID)
         {
@@ -99,19 +101,14 @@ namespace AutoStore.Controllers.System
                                            Server.MapPath("~/Content/ClientVender/media/186x113"), pic);
                     // file is uploaded
                     anh.SaveAs(path);
-
-
-
                 }
-                
+
                 result.KM = Int32.Parse(Request.Form["km"]);
                 db.SaveChanges();
             }
 
             //if(id=="")
             //{
-
-
             //    KHACHHANG temp = new KHACHHANG { MAKH = FuncClass.genNextCode(), TENKH = ten, DIACHI = adress, DIENTHOAI = phone, EMAIL = email };
             //    db.KHACHHANGs.Add(temp);
             //    db.SaveChanges();
