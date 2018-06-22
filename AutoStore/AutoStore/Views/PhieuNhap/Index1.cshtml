@@ -78,8 +78,8 @@
                                                                 @Html.DisplayFor(modelItem => item.NHACUNGCAP.TENNCC)
                                                             </td>
                                                             <td>
-                                                                <button type="button" style="margin-bottom:0px" class="btn btn-success btn-xs" onclick="javascript:DetailFunc(@item.MAPN,'@item.TENPN','@item.MANV','@item.NGAYNHAP','@item.MANCC')">Chi tiết</button>
-                                                                <button type="button" style="margin-bottom:0px" class="btn btn-warning btn-xs" onclick="javascript:setedit(@item.MAPN,'@item.TENPN','@item.MANV','@item.NGAYNHAP','@item.MANCC')">Sửa</button>
+                                                                <button type="button" style="margin-bottom:0px" class="btn btn-success btn-xs" onclick="javascript:DetailFunc(@item.MAPN,'@item.TENPN','@item.MANV','@Html.DisplayFor(modelItem => item.NGAYNHAP)','@item.MANCC')">Chi tiết</button>
+                                                                <button type="button" style="margin-bottom:0px" class="btn btn-warning btn-xs" onclick="javascript:setedit(@item.MAPN,'@item.TENPN','@item.MANV','@Html.DisplayFor(modelItem => item.NGAYNHAP)','@item.MANCC')">Sửa</button>
                                                                 <button type="button" style="margin-bottom:0px" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" onclick="javascript:confirmDelete(@item.MAPN,'@item.TENPN')">Xóa</button>
                                                             </td>
                                                         </tr>

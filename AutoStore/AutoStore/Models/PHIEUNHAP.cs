@@ -26,6 +26,8 @@ namespace AutoStore.Models
         [StringLength(10)]
         public string MANV { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime? NGAYNHAP { get; set; }
 
         [Required]
