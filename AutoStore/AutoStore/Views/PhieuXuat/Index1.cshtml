@@ -82,8 +82,8 @@
                                                                 @Html.DisplayFor(modelItem => item.KHACHHANG.TENKH)
                                                             </td>
                                                             <td>
-                                                                <button type="button" style="margin-bottom:0px" class="btn btn-success btn-xs" onclick="javascript:DetailFunc(@item.MAPX,'@item.TENPX','@item.MANV','@item.NGAYXUAT','@item.MAKH')">Chi tiết</button>
-                                                                <button type="button" style="margin-bottom:0px" class="btn btn-warning btn-xs" onclick="javascript:setedit(@item.MAPX,'@item.TENPX','@item.MANV','@item.NGAYXUAT','@item.MAKH')">Sửa</button>
+                                                                <button type="button" style="margin-bottom:0px" class="btn btn-success btn-xs" onclick="javascript:DetailFunc(@item.MAPX,'@item.TENPX','@item.MANV','@Html.DisplayFor(modelItem => item.NGAYXUAT)','@item.MAKH')">Chi tiết</button>
+                                                                <button type="button" style="margin-bottom:0px" class="btn btn-warning btn-xs" onclick="javascript:setedit(@item.MAPX,'@item.TENPX','@item.MANV','@Html.DisplayFor(modelItem => item.NGAYXUAT)','@item.MAKH')">Sửa</button>
                                                                 <button type="button" style="margin-bottom:0px" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" onclick="javascript:confirmDelete(@item.MAPX,'@item.TENPX')">Xóa</button>
                                                             </td>
                                                         </tr>

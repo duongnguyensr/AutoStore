@@ -30,6 +30,9 @@ namespace AutoStore.Models
         [StringLength(10)]
         public string MAKH { get; set; }
 
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime? NGAYXUAT { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

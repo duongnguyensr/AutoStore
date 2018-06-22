@@ -39,9 +39,9 @@ namespace AutoStore.Controllers.System
         public ActionResult Insert()
         {
             string objmanv = Request.Form["manv"];
-            string obj = Request.Form["date"];
+    
             string objtenpn = Request.Form["tenpx"];
-            DateTime objngaynhap = DateTime.ParseExact(obj, "d/M/yyyy", CultureInfo.InvariantCulture);
+            DateTime objngaynhap = DateTime.ParseExact(Request.Form["date"], "dd/MM/yyyy", CultureInfo.InvariantCulture);
             string objmakh = Request.Form["makh"];
             PHIEUXUAT temp = new PHIEUXUAT { MAPX = FuncClass.genNextCode(), TENPX=objtenpn, MANV = objmanv, NGAYXUAT = objngaynhap, MAKH = objmakh };
             db.PHIEUXUATs.Add(temp);
@@ -68,9 +68,9 @@ namespace AutoStore.Controllers.System
             if (result != null)
             {
                 result.MANV = Request.Form["manv"];
-                string obj = FuncClass.ConvertDateTime(Request.Form["date"]);
+               
                 result.TENPX = Request.Form["tenpx"];
-                result.NGAYXUAT = DateTime.ParseExact(obj, "d/M/yyyy", CultureInfo.InvariantCulture);
+                result.NGAYXUAT = DateTime.ParseExact(Request.Form["date"], "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 result.MAKH = Request.Form["makh"];
                 db.SaveChanges();
             }
