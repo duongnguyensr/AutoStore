@@ -1,5 +1,4 @@
-﻿@model IEnumerable<AutoStore.Models.GIOHANG>
-@{
+﻿@{
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 <link href="~/Content/ClientVender/css/cartcheckout.css" rel="stylesheet" />
@@ -14,132 +13,145 @@
     </div>
 </section>
 
-
-   <div class="shopping-cart border" style="margin:15px 250px 150px 200px;">
+<div class="shopping-cart border" style="margin:15px 250px 150px 200px;">
 
     <div class="column-labels">
         <label class="product-image" style="padding-left:90px">Product</label>
-        <label class="product-details"style="padding-left:90px">Description</label>
+        <label class="product-details" style="padding-left:90px">Description</label>
         <label class="product-price" style="padding-left:30px">Price</label>
         <label class="product-quantity">Quantity</label>
-        <label class="product-removal" >Remove</label>
+        <label class="product-removal">Remove</label>
         <label class="product-line-price" style="padding-right:30px">Total</label>
     </div>
-
-    @foreach (var item in Model)
-    {
-        <div class="product">
-            <div class="product-image">
-                <img src="@item.SANPHAM.HINHANH">
-            </div>
-            <div class="product-details">
-                <div class="product-title"><h5 style="font:700 16px 'Open Sans',sans-serif;">@item.SANPHAM.TENSP</h5></div>
-                <p class="product-description"><h5 style="font:100 14px 'Open Sans',sans-serif;margin-right:20px">@item.SANPHAM.MOTA</h5></p>
-            </div>
-            <div class="product-price b-featured__item-price" style="width:90px;margin-right:50px">@item.SANPHAM.DONGIA</div>
-            <div class="product-quantity">
-                <button onclick="decrease(@item.MAKH@item.MASP,'@item.SANPHAM.DONGIA','@item.MASP')">-</button>
-                <input type="number" id="NB_@item.MAKH@item.MASP" style="width:25px" value="@item.SOLUONG" min="1">
-                <button onclick="increase(@item.MAKH@item.MASP,'@item.SANPHAM.DONGIA','@item.MASP')">+</button>
-            </div>
-            <div class="product-removal" style="margin-left:10px">
-                <button class="btn btn-round btn-danger fa fa-trash"></button>
-            </div>
-            @{ var temp = item.SOLUONG * item.SANPHAM.DONGIA;}
-            <div class="product-line-price b-featured__item-price" style="width:90px;margin-left:40px" id="gia_@item.MAKH@item.MASP">@temp</div>
-        </div>
-    }
-
-
-    <div class="totals product">
-        <div class="totals-item">
-            <label>Subtotal</label>
-            <div class="totals-value" id="cart-subtotal">71.97</div>
-        </div>
-        <div class="totals-item">
-            <label>Shipping</label>
-            <div class="totals-value" id="cart-shipping">15.00</div>
-        </div>
-        <div class="totals-item totals-item-total">
-            <label>Grand Total</label>
-            <div class="totals-value" id="cart-total">90.57</div>
-        </div>
+    <div id="inforcheckout">
+        @Html.Action("Loaditem", "GioHang")
     </div>
+    
 
-       <div class="b-search__main-form-submit">
-           <button class="btn m-btn">Checkout<span class="fa fa-shopping-cart"></span></button>
-       </div>
+    
 
+    <div class="b-search__main-form-submit">
+        <button class="btn m-btn" onclick="location.href='@Url.Action("Checkout", "GioHang")'">Checkout<span class="fa fa-shopping-cart"></span></button>
+    </div>
 </div>
 
-
 <script type="text/javascript">
-    function decrease(nbid,gia,idsp) {
-        var i=$("#NB_"+nbid+"").val();
-        if(i>1){
-            $('#NB_'+nbid+'').val(i-1);
-            i=i-1;
-            gia=gia*i;
-            $('#gia_'+nbid+'').text(gia);
+    function decrease(nbid, gia, idsp) {
+        var i = $("#NB_" + nbid + "").val();
+        if (i > 1) {
+            $('#NB_' + nbid + '').val(i - 1);
+            i = i - 1;
+            gia = gia * i;
+            $('#gia_' + nbid + '').text(gia);
 
             $.ajax({
                 url: "/GioHang/decrease",
                 data: {
                     'i': i,
-                    'idsp':idsp
+                    'idsp': idsp
                 },
                 datatype: 'html',
                 type: 'Get',
                 success: function () {
-                    console.log("xoa thanh cong");
-                    
+                    $.ajax({
+                        url: "/GioHang/Loaditem",
+
+                        type: 'Get',
+                        success: function (cart) {
+                            $("#inforcheckout").html(cart);
+
+
+                        },
+                        error: function () {
+                        }
+                    });
+
                 },
                 error: function () {
                     $("#err_").attr("style", "display:normal");
                 }
             });
         }
-        
+
     }
 
-        function increase(nbid,gia,idsp) {
-            var i=$("#NB_"+nbid+"").val();
-            if(i>0){
-                var y=parseInt(i)+1;
-                $('#NB_'+nbid+'').val(y);
-               
-                gia=gia*y;
-                $('#gia_'+nbid+'').text(gia);
+    function increase(nbid, gia, idsp) {
+        var i = $("#NB_" + nbid + "").val();
+        if (i > 0) {
+            var y = parseInt(i) + 1;
+            $('#NB_' + nbid + '').val(y);
 
+            gia = gia * y;
+            $('#gia_' + nbid + '').text(gia);
+
+            $.ajax({
+                url: "/GioHang/decrease",
+                data: {
+                    'i': y,
+                    'idsp': idsp
+                },
+                datatype: 'html',
+                type: 'Get',
+                success: function () {
+                    $.ajax({
+                        url: "/GioHang/Loaditem",
+
+                        type: 'Get',
+                        success: function (cart) {
+                            $("#inforcheckout").html(cart);
+
+
+                        },
+                        error: function () {
+                        }
+                    });
+
+                },
+                error: function () {
+                    $("#err_").attr("style", "display:normal");
+                }
+            });
+        }
+
+    }
+
+    function deleteitem(idsp) {
+        $.ajax({
+            url: "/GioHang/delitem2",
+            data: {
+                'idsp': idsp
+            },
+            datatype: 'html',
+            type: 'Get',
+            success: function () {
                 $.ajax({
-                    url: "/GioHang/decrease",
-                    data: {
-                        'i': y,
-                        'idsp':idsp
-                    },
-                    datatype: 'html',
+                    url: "/GioHang/Loaditem",
+
                     type: 'Get',
-                    success: function () {
-                        console.log("xoa thanh cong");
-                    
+                    success: function (cart) {
+                        $("#inforcheckout").html(cart);
+                      
+
                     },
                     error: function () {
-                        $("#err_").attr("style", "display:normal");
                     }
                 });
-            }
 
-        }
-    
+            },
+            error: function () {
+                $("#err_").attr("style", "display:normal");
+            }
+        });
+    }
 </script>
 <style>
     input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-}
-input[type="number"] {
-    -moz-appearance: textfield;
-}
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
 </style>

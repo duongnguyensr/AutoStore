@@ -17,16 +17,12 @@
     <link rel="alternate stylesheet" type="text/css" href="~/Content/ClientVender/assets/switcher/css/color4.css" title="color4" media="all" />
     <link rel="alternate stylesheet" type="text/css" href="~/Content/ClientVender/assets/switcher/css/color5.css" title="color5" media="all" />
     <link rel="alternate stylesheet" type="text/css" href="~/Content/ClientVender/assets/switcher/css/color6.css" title="color6" media="all" />
-    <link href="~/Content/ClientVender/css/custom.css" rel="stylesheet"/>
+    <link href="~/Content/ClientVender/css/custom.css" rel="stylesheet" />
     <!--[if lt IE 9]>
     <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="//oss.maxcdn.com/libs/respond.~/Content/ClientVender/js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link href="~/Content/ClientVender/css/default.css" rel="stylesheet" />
-
-
-
-
 </head>
 <body class="m-index" data-scrolling-animations="true" data-equal-height=".b-auto__main-item">
 
@@ -80,29 +76,25 @@
 
                             @if (Session["ClientUserID"] != null)
                             {
-                            <li>
-                                <a href="@Url.Action("Logout", null, new { area = string.Empty, controller = "ClientLogin" }, Request.Url.Scheme)">@Session["ClientUserName"].ToString()</a>
-                            </li>
+                                <li>
+                                    <a href="@Url.Action("Logout", null, new { area = string.Empty, controller = "ClientLogin" }, Request.Url.Scheme)">@Session["ClientUserName"].ToString()</a>
+                                </li>
                             }
-                            else{ 
-                            <li><a href="#">Đăng ký</a></li>
-                            <li><a data-toggle="modal" data-target="#LoginModal">Đăng nhập</a></li>
+                            else
+                            {
+                                <li><a href="#">Đăng ký</a></li>
+                                <li><a data-toggle="modal" data-target="#LoginModal">Đăng nhập</a></li>
                             }
-
                         </ul>
-                        
                     </nav>
                 </div>
                 <div class="col-md-2 col-xs-6">
                     <div class="b-topBar__lang">
                         <div>
-                            <a class="m-langLink dropdown-toggle"  href="#" data-toggle="modal" data-target="#cartModal"><span class="fa fa-shopping-cart" style="font-size:20px"></span>   Giỏ hàng<span class="fa fa-caret-down"></span></a>
-                            
+                            <a class="m-langLink dropdown-toggle" href="#" data-toggle="modal" data-target="#cartModal"><span class="fa fa-shopping-cart" style="font-size:20px"></span>   Giỏ hàng<span class="fa fa-caret-down"></span></a>
                         </div>
                     </div>
                 </div>
-
-                
             </div>
         </div>
     </header><!--b-topBar-->
@@ -135,15 +127,13 @@
                                         <li><a href="listings.html">Sale Off</a></li>
                                         <li><a href="listingsTwo.html">Super car</a></li>
                                         <li><a href="listTable.html">Hyper car</a></li>
-                                        
                                     </ul>
                                 </li>
                                 <li><a href="compare.html">Tư vấn</a></li>
                                 <li><a href="about.html">Dịch vụ</a></li>
                                 <li><a href="@Url.Action("Index", null, new { area = string.Empty, controller = "Shop" }, Request.Url.Scheme)">Gian hàng</a></li>
-                                
-                                <li><a href="submit1.html">Liên hệ</a></li>
 
+                                <li><a href="submit1.html">Liên hệ</a></li>
                             </ul>
                         </div>
                     </div>
@@ -153,7 +143,6 @@
     </nav><!--b-nav-->
 
     @RenderBody()
-
 
     <div class="b-features">
         <div class="container">
@@ -326,11 +315,8 @@
             </div>
         </div>
 
-
-
-
         <div class="x_content">
-            <div class="modal fade bs-example-modal-sm" id="LoginModal" tabindex="-1"  role="dialog"  aria-hidden="false">
+            <div class="modal fade bs-example-modal-sm" id="LoginModal" tabindex="-1" role="dialog" aria-hidden="false">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
 
@@ -342,46 +328,41 @@
                                 <h3><a href="home.html">Auto<span>Store</span></a></h3>
                                 <h2><a href="home.html"> Duong  Nguyen  Auto |</a></h2>
                             </div>
-                            
                         </div>
                         <div class="modal-body">
-
                         </div>
-                            <div class="form-horizontal form-label-left" novalidate>
-                                <div class="item form-group" style="margin-left:40px">
-                        
-                                    <div class="col-md-10 col-sm-10 col-xs-12">
-                                        <input id="clientuser" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="User name" required="required" type="text">
-                                    </div>
-                                </div>
-                                <div class="item form-group" style="margin-left:40px">
+                        <div class="form-horizontal form-label-left" novalidate>
+                            <div class="item form-group" style="margin-left:40px">
 
-                                    <div class="col-md-10 col-sm-10 col-xs-12">
-                                        <input id="clientpass" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Password" required="required" type="password">
-                                    </div>
-                                </div>
-                                <span id="err_" style="display:none">Mật khẩu không chính xác!</span>
-
-                                <div class="modal-footer">
-                                    
-                                    <div class="b-search__main-form-submit" style="margin-right:60px">
-                                       
-                                        <button type="submit" id="btnlogin" class="btn m-btn">Sign in<span class="fa fa-angle-right"></span></button>
-                                    </div>
-                                    <h6><a href="#" style="text-align:center">Or create account here!</a></h6>
+                                <div class="col-md-10 col-sm-10 col-xs-12">
+                                    <input id="clientuser" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="User name" required="required" type="text">
                                 </div>
                             </div>
+                            <div class="item form-group" style="margin-left:40px">
+
+                                <div class="col-md-10 col-sm-10 col-xs-12">
+                                    <input id="clientpass" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Password" required="required" type="password">
+                                </div>
+                            </div>
+                            <span id="err_" style="display:none">Mật khẩu không chính xác!</span>
+
+                            <div class="modal-footer">
+
+                                <div class="b-search__main-form-submit" style="margin-right:60px">
+
+                                    <button type="submit" id="btnlogin" class="btn m-btn">Sign in<span class="fa fa-angle-right"></span></button>
+                                </div>
+                                <h6><a href="#" style="text-align:center">Or create account here!</a></h6>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-
-
-
-    @*---------------------------cart---------------------------*@
+        @*---------------------------cart---------------------------*@
         <div class="x_content">
-            <div class="modal fade bs-example-modal-lg" id="cartModal"  tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal fade bs-example-modal-lg" id="cartModal" tabindex="-1" role="dialog" aria-hidden="false">
                 <div class="modal-dialog modal-lg" style="width:905px">
                     <div class="modal-content">
 
@@ -393,16 +374,11 @@
                                 <h3><a href="home.html">Auto<span>Store</span></a></h3>
                                 <h2><a href="home.html"> Duong  Nguyen  Auto |</a></h2>
                             </div>
-                            
                         </div>
                         <div class="modal-body" id="cartmodalbody" style="height:310px;overflow:auto;">
 
                             @Html.Action("cart", "GioHang")
-                            
-                            </div>
-
-                       
-                       
+                        </div>
 
                         <div class="modal-footer">
 
@@ -410,7 +386,6 @@
 
                                 <button type="submit" onclick="location.href='@Url.Action("Index", "GioHang")'" class="btn m-btn">Checkout<span class="fa fa-shopping-cart"></span></button>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -418,10 +393,8 @@
         </div>
 
         <script src="~/Content/vendors/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript">
+        <script type="text/javascript">
 
-
-           
             $("#btnlogin").click(function () {
                 var user = $("#clientuser").val();
                 var pass = $("#clientpass").val();
@@ -429,7 +402,7 @@
                     url: "/ClientLogin/checklogin",
                     data: {
                         'user': user,
-                        'pass':pass
+                        'pass': pass
                     },
                     datatype: 'html',
                     type: 'Get',
@@ -443,7 +416,7 @@
                 });
             });
 
-            function delitem(idkh,idsp) {
+            function delitem(idkh, idsp) {
                 $.ajax({
                     url: "/GioHang/delitem",
                     data: {
@@ -456,12 +429,11 @@
                         showcartfromdelitem();
                     },
                     error: function () {
-                       
+
                     }
                 });
             }
 
-        
             function showcartfromdelitem() {
                 $.ajax({
                     url: "/GioHang/cart",
@@ -476,9 +448,7 @@
                     }
                 });
             }
-
-    </script>
-
+        </script>
     </footer><!--b-footer-->
     <!--Main-->
     <script src="~/Content/ClientVender/js/jquery-1.11.3.min.js"></script>
@@ -505,6 +475,5 @@
     <script src="~/Content/ClientVender/js/wow.min.js"></script>
     <script src="~/Content/ClientVender/js/jquery.placeholder.min.js"></script>
     <script src="~/Content/ClientVender/js/theme.js"></script>
-
 </body>
 </html>

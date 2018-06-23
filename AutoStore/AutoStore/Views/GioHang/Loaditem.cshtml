@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AutoStore.Models.GIOHANG>
+@{
+    Layout =null;
+}
+@{ Double? cost=0;}
+@foreach (var item in Model)
+{
+    <div class="product">
+        <div class="product-image">
+            <img src="@item.SANPHAM.HINHANH">
+        </div>
+        <div class="product-details">
+            <div class="product-title"><h5 style="font:700 16px 'Open Sans',sans-serif;">@item.SANPHAM.TENSP</h5></div>
+            <p class="product-description"><h5 style="font:100 14px 'Open Sans',sans-serif;margin-right:20px">@item.SANPHAM.MOTA</h5></p>
+        </div>
+        <div class="product-price b-featured__item-price" style="width:90px;margin-right:50px">@item.SANPHAM.DONGIA</div>
+        <div class="product-quantity">
+            <button onclick="decrease(@item.MAKH@item.MASP,'@item.SANPHAM.DONGIA','@item.MASP')">-</button>
+            <input type="number" id="NB_@item.MAKH@item.MASP" style="width:25px" value="@item.SOLUONG" min="1">
+            <button onclick="increase(@item.MAKH@item.MASP,'@item.SANPHAM.DONGIA','@item.MASP')">+</button>
+        </div>
+        <div class="product-removal" style="margin-left:10px">
+            <button class="btn btn-round btn-danger fa fa-trash" style="margin-left:20px" onclick="deleteitem(@item.MASP)"></button>
+        </div>
+        @{ var temp = item.SOLUONG * item.SANPHAM.DONGIA;
+            cost = cost + temp;
+            }
+        <div class="product-line-price b-featured__item-price" style="width:80px;margin-left:90px" id="gia_@item.MAKH@item.MASP">@temp</div>
+    </div>
+}
+    <div class="totals product">
+        <div class="totals-item">
+            <label>Subtotal</label>
+            <div class="totals-value" id="cart-subtotal">@cost</div>
+        </div>
+        @{ var temp2 = cost / 5;
+        }
+        <div class="totals-item">
+            <label>Tax x20%</label>
+            <div class="totals-value" id="cart-shipping">@temp2</div>
+        </div>
+        @{ temp2 =cost+ cost / 5;
+        }
+        <div class="totals-item totals-item-total">
+            <label>Grand Total</label>
+            <div class="totals-value" id="cart-total">@temp2</div>
+        </div>
+    </div>
