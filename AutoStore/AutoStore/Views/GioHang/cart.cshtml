@@ -16,7 +16,7 @@
             <h5><a href="detail.html">@item.SANPHAM.TENSP</a>
             </h5>
             <div class="b-featured__item-price">
-                $@item.SANPHAM.DONGIA 
+                @Html.DisplayFor(modelItem => item.SANPHAM.DONGIA)
             </div>
             <span class="badge" style="margin:10px 0 0 10px">@item.SOLUONG Items</span>
             
