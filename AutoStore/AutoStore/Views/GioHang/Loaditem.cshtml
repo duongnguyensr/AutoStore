@@ -13,7 +13,7 @@
             <div class="product-title"><h5 style="font:700 16px 'Open Sans',sans-serif;">@item.SANPHAM.TENSP</h5></div>
             <p class="product-description"><h5 style="font:100 14px 'Open Sans',sans-serif;margin-right:20px">@item.SANPHAM.MOTA</h5></p>
         </div>
-        <div class="product-price b-featured__item-price" style="width:90px;margin-right:50px">@item.SANPHAM.DONGIA</div>
+        <div class=" b-featured__item-price" style="width:90px;margin-right:50px">@Html.DisplayFor(Model => item.SANPHAM.DONGIA)</div>
         <div class="product-quantity">
             <button onclick="decrease(@item.MAKH@item.MASP,'@item.SANPHAM.DONGIA','@item.MASP')">-</button>
             <input type="number" id="NB_@item.MAKH@item.MASP" style="width:25px" value="@item.SOLUONG" min="1">
@@ -25,24 +25,24 @@
         @{ var temp = item.SOLUONG * item.SANPHAM.DONGIA;
             cost = cost + temp;
             }
-        <div class="product-line-price b-featured__item-price" style="width:80px;margin-left:90px" id="gia_@item.MAKH@item.MASP">@temp</div>
+        <div class=" b-featured__item-price" style="width:100px;margin-left:70px" id="gia_@item.MAKH@item.MASP">@string.Format("{0:C0}", temp)</div>
     </div>
 }
     <div class="totals product">
         <div class="totals-item">
             <label>Subtotal</label>
-            <div class="totals-value" id="cart-subtotal">@cost</div>
+            <div style="float:right;text-align:right" id="cart-subtotal">@string.Format("{0:C0}", cost)</div>
         </div>
         @{ var temp2 = cost / 5;
         }
         <div class="totals-item">
             <label>Tax x20%</label>
-            <div class="totals-value" id="cart-shipping">@temp2</div>
+            <div style="float:right;text-align:right" id="cart-shipping">@string.Format("{0:C0}", temp2)</div>
         </div>
         @{ temp2 =cost+ cost / 5;
         }
         <div class="totals-item totals-item-total">
             <label>Grand Total</label>
-            <div class="totals-value" id="cart-total">@temp2</div>
+            <div style="float:right;text-align:right" id="cart-total">@string.Format("{0:C0}", temp2)</div>
         </div>
     </div>

@@ -107,13 +107,21 @@ namespace AutoStore.Controllers.System
                 db.SaveChanges();
             }
 
-            //if(id=="")
-            //{
-            //    KHACHHANG temp = new KHACHHANG { MAKH = FuncClass.genNextCode(), TENKH = ten, DIACHI = adress, DIENTHOAI = phone, EMAIL = email };
-            //    db.KHACHHANGs.Add(temp);
-            //    db.SaveChanges();
-            //}
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Search()
+        {
+            string objmansx = Request.Form["mansx"];
+            string objmausac = Request.Form["mausac"];
+            string objmaloai = Request.Form["maloai"];
+            string objmota = Request.Form["mota"];
+            double objdongia = double.Parse(Request.Form["dongia"]);
+            int objsoluong = Int32.Parse(Request.Form["soluong"]);
+            int objnam = Int32.Parse(Request.Form["nam"]);
+            int objkm = Int32.Parse(Request.Form["km"]);
+            return View();
         }
     }
 }

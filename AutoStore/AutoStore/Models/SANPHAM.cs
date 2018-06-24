@@ -39,6 +39,7 @@ namespace AutoStore.Models
         [StringLength(1000)]
         public string HINHANH { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public double? DONGIA { get; set; }
 
         public int? SOLUONG { get; set; }
