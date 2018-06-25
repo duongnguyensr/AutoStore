@@ -11,10 +11,10 @@
                 <img src="~/Content/ClientVender/media/main-slider/1.jpg" alt="sliderImg" />
                 <div class="container">
                     <div class="carousel-caption b-slider__info">
-                        <h3>Trạm đến giấc mơ</h3>
+                        <h3>Touch Dream</h3>
                         <h2>Lamborghini Aventador</h2>
                         <p>Model 2015 <span>$184,900</span></p>
-                        <a class="btn m-btn" href="detail.html">see details<span class="fa fa-angle-right"></span></a>
+                        <a class="btn m-btn" href="#">see details<span class="fa fa-angle-right"></span></a>
                     </div>
                 </div>
             </div>
@@ -22,10 +22,10 @@
                 <img src="~/Content/ClientVender/media/main-slider/2.jpg" alt="sliderImg" />
                 <div class="container">
                     <div class="carousel-caption b-slider__info">
-                        <h3>Trạm đến giấc mơ</h3>
+                        <h3>Touch Dream</h3>
                         <h2>Lamborghini Aventador</h2>
                         <p>Model 2016 <span>$204,900</span></p>
-                        <a class="btn m-btn" href="detail.html">see details<span class="fa fa-angle-right"></span></a>
+                        <a class="btn m-btn" href="#">see details<span class="fa fa-angle-right"></span></a>
                     </div>
                 </div>
             </div>
@@ -33,10 +33,10 @@
                 <img src="~/Content/ClientVender/media/main-slider/3.jpg" alt="sliderImg" />
                 <div class="container">
                     <div class="carousel-caption b-slider__info">
-                        <h3>Trạm đến giấc mơ</h3>
+                        <h3>Touch Dream</h3>
                         <h2>Lexus NX 300h</h2>
                         <p>Model 2017 <span>$200,900</span></p>
-                        <a class="btn m-btn" href="detail.html">see details<span class="fa fa-angle-right"></span></a>
+                        <a class="btn m-btn" href="#">see details<span class="fa fa-angle-right"></span></a>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
 
 <section class="b-search">
     <div class="container">
-        <form action="listings.html" method="POST" class="b-search__main">
+        <form action="#" method="POST" class="b-search__main" style="height:265px">
             <div class="b-search__main-title wow zoomInUp" data-wow-delay="0.1s">
                 <h2>UNSURE WHICH VEHICLE YOU ARE LOOKING FOR? FIND IT HERE</h2>
             </div>
@@ -333,7 +333,7 @@
                     </div>
                 </div>
             </div>
-            <div class="b-search__main-form wow zoomInUp" data-wow-delay="0.1s">
+            @*<div class="b-search__main-form wow zoomInUp" data-wow-delay="0.1s">
                 <div class="row">
                     <div class="col-xs-12 col-md-8">
                         <div class="m-firstSelects">
@@ -387,10 +387,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
         </form>
     </div>
-</section><!--b-search-->
+</section>
 
 @*------------render vehicles-----------*@
 <section class="b-featured">
@@ -401,7 +401,7 @@
             {
                 <div>
                     <div class="b-featured__item wow rotateIn" data-wow-delay="0.1s" data-wow-offset="150">
-                        <a href="detail.html">
+                        <a href="@Url.Action("Index", "Detail",new {idsp=@item.MASP })">
                             
                             <img src="@item.HINHANH" alt="@item.TENSP" />
                             <span class="m-premium">Premium</span>
@@ -436,13 +436,13 @@
                 <div class="b-welcome__text wow fadeInLeft" data-wow-delay="0.1s" data-wow-offset="100">
                     <h2>WORLD'S LEADING CAR DEALER</h2>
                     <h3>WELCOME TO DUONGNGUYEN AUTO</h3>
-                    <p>Từ khi những chiếc ô tô đầu tiên xuất hiện ở Việt Nam thời Pháp thuộc, ô tô đã luôn là một biểu tượng cho sự giàu có, đẳng cấp thượng lưu và là mơ ước của bất cứ người Việt nào. Không chỉ là một phương tiện đi lại tiện lợi, nhanh chóng, giúp che mưa, chắn gió, chống nắng cho cả gia đình, ô tô còn là biểu tượng cho sự thành công trong sự nghiệp, khẳng định đẳng cấp và địa vị xã hội vượt trội của chủ xe.</p>
-                    <p>“Hãy cho tôi biết bạn đi xe gì, tôi sẽ nói cho bạn biết bạn là ai” </p>
+                    <p>Since the first cars appeared in Vietnam during the French colonial era, cars have always been a symbol of wealth, elite and the dream of any Vietnamese. It is not only a convenient way to travel, protect the rain, wind and sun protection for the whole family, the car is also a symbol of career success, affirming the level and status of the commune. Outstanding car owner.</p>
+                    <p>"Let me know what you ride, I'll tell you who you are” </p>
                     <ul>
-                        <li><span class="fa fa-check"></span>Tính năng vượt trội </li>
-                        <li><span class="fa fa-check"></span>Hỗ trợ tận tình</li>
-                        <li><span class="fa fa-check"></span>Coi trọng chữ tín làm lên thương hiệu </li>
-                        <li><span class="fa fa-check"></span>Dịch vụ hậu mãi tốt nhất</li>
+                        <li><span class="fa fa-check"></span>Exceptional Features </li>
+                        <li><span class="fa fa-check"></span>Dedicated support</li>
+                        <li><span class="fa fa-check"></span>Appreciate the credibility of the brand </li>
+                        <li><span class="fa fa-check"></span>Best after sales service</li>
                     </ul>
                 </div>
             </div>
@@ -454,7 +454,9 @@
                                 <div class="b-welcome__services-img m-auto">
                                     <span class="fa fa-cab"></span>
                                 </div>
-                                <h3>TRẢ GÓP</h3>
+                                <h3>
+                                    Installment
+                                </h3>
                             </div>
                         </div>
                         <div class="col-xs-6 m-padding">
@@ -462,7 +464,7 @@
                                 <div class="b-welcome__services-img m-trade">
                                     <span class="fa fa-male"></span>
                                 </div>
-                                <h3>TRAO ĐỔI</h3>
+                                <h3>Exchange</h3>
                             </div>
                         </div>
                         <div class="col-xs-12 text-center">
@@ -473,7 +475,7 @@
                                 <div class="b-welcome__services-img m-buying">
                                     <span class="fa fa-book"></span>
                                 </div>
-                                <h3>HƯỚNG DẪN</h3>
+                                <h3>Tutorial</h3>
                             </div>
                         </div>
                         <div class="col-xs-6 m-padding">
@@ -588,7 +590,7 @@
     </div>
 </section><!--b-world-->
 
-<section class="b-asks">
+@*<section class="b-asks">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-10 col-sm-offset-1 col-md-offset-0 col-xs-12">
@@ -630,7 +632,7 @@
             </div>
         </div>
     </div>
-</section><!--b-asks-->
+</section>*@
 
 <section class="b-auto">
     <div class="container">

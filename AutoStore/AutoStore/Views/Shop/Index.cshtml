@@ -17,7 +17,7 @@
 
 <div class="b-breadCumbs s-shadow">
     <div class="container wow zoomInUp" data-wow-delay="0.2s">
-        <a href="home.html" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="listTable.html" class="b-breadCumbs__page m-active">Search Results</a>
+        <a href="#" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="#" class="b-breadCumbs__page m-active">Danh mục xe</a>
     </div>
 </div><!--b-breadCumbs-->
 
@@ -38,7 +38,7 @@
                     <a href="compare.html" class="b-infoBar__compare-item"><span class="fa fa-compress"></span>COMPARE VEHICLES: 2</a>
                 </div>
             </div>
-            <div class="col-lg-8 col-xs-12">
+            @*<div class="col-lg-8 col-xs-12">
                 <div class="b-infoBar__select wow zoomInUp" data-wow-delay="0.2s">
                     <form method="post" action="/">
                         <div class="b-infoBar__select-one">
@@ -62,7 +62,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div>*@
         </div>
     </div>
 </div><!--b-infoBar-->
@@ -79,13 +79,13 @@
                         <div class="col-lg-4 col-md-6 col-xs-12">
                             <div class="b-items__cell wow zoomInUp" data-wow-delay="0.2s">
                                 <div class="b-items__cars-one-img" >
-                                    <img style="margin-top:50px" class='img-responsive' src="@item.HINHANH" alt='@item.TENSP' />
-                                    <a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-                                    <span class="b-items__cars-one-img-type m-premium">PREMIUM</span>
-                                    <form action="/GioHang/AddToCart?idsp=@item.MASP" method="post">
-                                     
-                                       
-                                    </form>
+                                    <a href="@Url.Action("Index", "Detail",new {idsp=@item.MASP })">
+                                        <img style="margin-top:50px" class='img-responsive' src="@item.HINHANH" alt='@item.TENSP' />
+                                        @*<a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>*@
+                                        <span class="b-items__cars-one-img-type m-premium">PREMIUM</span>
+                                        <form action="/GioHang/AddToCart?idsp=@item.MASP" method="post"></form>
+                                    </a>
+                                    
                                 </div>
                                 <div class="b-items__cell-info" style="height:278px;position: absolute;bottom:90px;padding-left:5px">
                                     <div  class="s-lineDownLeft b-items__cell-info-title" style="width:240px">
@@ -136,9 +136,9 @@
             </div>
             <div class="col-lg-3 col-sm-4 col-xs-12">
                 <aside class="b-items__aside">
-                    <h2 class="s-title wow zoomInUp" data-wow-delay="0.2s">REFINE YOUR SEARCH</h2>
+                    <h2 class="s-title wow zoomInUp" data-wow-delay="0.2s">Welcome you!</h2>
                     <div class="b-items__aside-main wow zoomInUp" data-wow-delay="0.2s">
-                        <form>
+                        @*<form>
                             <div class="b-items__aside-main-body">
                                 <div class="b-items__aside-main-body-item">
                                     <label>SELECT A MAKE</label>
@@ -196,7 +196,7 @@
                                 <button type="submit" class="btn m-btn">FILTER VEHICLES<span class="fa fa-angle-right"></span></button><br />
                                 <a href="">RESET ALL FILTERS</a>
                             </footer>
-                        </form>
+                        </form>*@
                     </div>
                     <div class="b-items__aside-sell wow zoomInUp" data-wow-delay="0.2s">
                         <div class="b-items__aside-sell-img">
@@ -208,7 +208,7 @@
                                 biben edum tristique sed metus fusce
                                 Maecenas lobortis.
                             </p>
-                            <a href="submit1.html" class="btn m-btn">REGISTER NOW<span class="fa fa-angle-right"></span></a>
+                            <a data-toggle="modal" data-target="#LoginModal" class="btn m-btn">LOGIN NOW<span class="fa fa-angle-right"></span></a>
                         </div>
                     </div>
                 </aside>

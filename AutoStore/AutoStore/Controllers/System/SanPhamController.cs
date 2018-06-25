@@ -16,13 +16,14 @@ namespace AutoStore.Controllers.System
         private DBConnection db = new DBConnection();
         private static string query = null;
         private static int checksearch = 0;
+
         /// <summary>
         ///
         /// </summary>
         /// <returns></returns>
         public ActionResult Index()
         {
-            if (checksearch==0)
+            if (checksearch == 0)
                 return View(db.SANPHAMs.ToList().OrderBy(a => a.TENSP));
             else
                 return View(db.SANPHAMs.SqlQuery(query).ToList().OrderBy(a => a.TENSP));
@@ -49,31 +50,29 @@ namespace AutoStore.Controllers.System
         public ActionResult Insert(HttpPostedFileBase anh)
         {
             string objtensp = Request.Form["tensp"];
-            var check = db.SANPHAMs.SingleOrDefault(a => a.TENSP == objtensp);
-            if (check == null)
+
+            string objmansx = Request.Form["mansx"];
+            string objmausac = Request.Form["mausac"];
+            string objmaloai = Request.Form["maloai"];
+            string objmota = Request.Form["mota"];
+            double objdongia = double.Parse(Request.Form["dongia"]);
+            int objsoluong = Int32.Parse(Request.Form["soluong"]);
+            int objnam = Int32.Parse(Request.Form["nam"]);
+            int objkm = Int32.Parse(Request.Form["km"]);
+            string objanh = "";
+            if (anh != null)
             {
-                string objmansx = Request.Form["mansx"];
-                string objmausac = Request.Form["mausac"];
-                string objmaloai = Request.Form["maloai"];
-                string objmota = Request.Form["mota"];
-                double objdongia = double.Parse(Request.Form["dongia"]);
-                int objsoluong = Int32.Parse(Request.Form["soluong"]);
-                int objnam = Int32.Parse(Request.Form["nam"]);
-                int objkm = Int32.Parse(Request.Form["km"]);
-                string objanh = "";
-                if (anh != null)
-                {
-                    string pic = Path.GetFileName(anh.FileName);
-                    objanh = "/Content/ClientVender/media/186x113/" + pic;
-                    string path = Path.Combine(
-                                           Server.MapPath("~/Content/ClientVender/media/186x113"), pic);
-                    // file is uploaded
-                    anh.SaveAs(path);
-                }
-                SANPHAM temp = new SANPHAM { MASP = FuncClass.genNextCode(), TENSP = objtensp, MANSX = objmansx, MAUSAC = objmausac, MALOAI = objmaloai, MOTA = objmota, DONGIA = objdongia, SOLUONG = objsoluong, YEAR = objnam, KM = objkm, HINHANH = objanh };
-                db.SANPHAMs.Add(temp);
-                db.SaveChanges();
+                string pic = Path.GetFileName(anh.FileName);
+                objanh = "/Content/ClientVender/media/186x113/" + pic;
+                string path = Path.Combine(
+                                       Server.MapPath("~/Content/ClientVender/media/186x113"), pic);
+                // file is uploaded
+                anh.SaveAs(path);
             }
+            SANPHAM temp = new SANPHAM { MASP = FuncClass.genNextCode(), TENSP = objtensp, MANSX = objmansx, MAUSAC = objmausac, MALOAI = objmaloai, MOTA = objmota, DONGIA = objdongia, SOLUONG = objsoluong, YEAR = objnam, KM = objkm, HINHANH = objanh };
+            db.SANPHAMs.Add(temp);
+            db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
@@ -124,10 +123,10 @@ namespace AutoStore.Controllers.System
             string objmausac = Request.Form["mausac"];
             string objmaloai = Request.Form["maloai"];
             string objmota = Request.Form["mota"];
-            double objdongia=0;
+            double objdongia = 0;
             if (Request.Form["dongia"] != "")
             {
-                 objdongia = double.Parse(Request.Form["dongia"]);
+                objdongia = double.Parse(Request.Form["dongia"]);
             }
 
             int objsoluong = 0;
@@ -139,26 +138,26 @@ namespace AutoStore.Controllers.System
             int objnam = 0;
             if (Request.Form["nam"] != "")
             {
-                objnam= Int32.Parse(Request.Form["nam"]);
+                objnam = Int32.Parse(Request.Form["nam"]);
             }
 
             int objkm = 0;
             if (Request.Form["km"] != "")
             {
-                objkm= Int32.Parse(Request.Form["km"]);
+                objkm = Int32.Parse(Request.Form["km"]);
             }
             List<Parameter> lipa = new List<Parameter>();
             if (objtensp != "" && objtensp != null)
             {
                 lipa.Add(new Parameter("TENSP", SqlDbType.VarChar, objtensp, 1));
             }
-            if (objmansx != "" && objmansx!=null)
+            if (objmansx != "" && objmansx != null)
             {
-                lipa.Add(new Parameter("MANSX", SqlDbType.VarChar,objmansx, 1));
+                lipa.Add(new Parameter("MANSX", SqlDbType.VarChar, objmansx, 1));
             }
-            if (objmausac != "" && objmausac!=null)
+            if (objmausac != "" && objmausac != null)
             {
-                lipa.Add(new Parameter("MAUSAC", SqlDbType.VarChar,objmausac, 1));
+                lipa.Add(new Parameter("MAUSAC", SqlDbType.VarChar, objmausac, 1));
             }
             if (objmaloai != "" && objmaloai != null)
             {
@@ -192,7 +191,6 @@ namespace AutoStore.Controllers.System
             return RedirectToAction("Index");
         }
 
-
         public string getAll(params Parameter[] listFilter)
         {
             List<SANPHAM> lidata = new List<SANPHAM>();
@@ -220,7 +218,7 @@ namespace AutoStore.Controllers.System
                     }
                     else
                     {
-                        swhere += "[" + item.name + "] LIKE N'%" + item.data+"%'";
+                        swhere += "[" + item.name + "] LIKE N'%" + item.data + "%'";
                         //cm.Parameters.Add(new SqlParameter("@" + item.name, "%" + item.data + "%"));
                     }
                 }
@@ -232,7 +230,7 @@ namespace AutoStore.Controllers.System
             return sql;
             //cm.CommandText = sql;
             //cm.CommandType = CommandType.Text;
-           // DataSet ds = new DataSet();
+            // DataSet ds = new DataSet();
             //int ret = db.getCommand(ref ds, "Tmp", cm);
             //if (ret < 0)
             //{
@@ -281,7 +279,7 @@ namespace AutoStore.Controllers.System
             //        lidata.Add(obj);
             //    }
             //}
-           // return lidata;
+            // return lidata;
         }
     }
 }

@@ -39,10 +39,10 @@
     function decrease(nbid, gia, idsp) {
         var i = $("#NB_" + nbid + "").val();
         if (i > 1) {
-            $('#NB_' + nbid + '').val(i - 1);
+            //$('#NB_' + nbid + '').val(i - 1);
             i = i - 1;
             gia = gia * i;
-            $('#gia_' + nbid + '').text(gia);
+            //$('#gia_' + nbid + '').text(gia);
 
             $.ajax({
                 url: "/GioHang/decrease",
@@ -79,10 +79,10 @@
         var i = $("#NB_" + nbid + "").val();
         if (i > 0) {
             var y = parseInt(i) + 1;
-            $('#NB_' + nbid + '').val(y);
+            //$('#NB_' + nbid + '').val(y);
 
             gia = gia * y;
-            $('#gia_' + nbid + '').text(gia);
+            //$('#gia_' + nbid + '').text(gia);
 
             $.ajax({
                 url: "/GioHang/decrease",
