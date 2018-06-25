@@ -104,8 +104,7 @@ namespace AutoStore.Controllers.System
                 {
                     string pic = Path.GetFileName(anh.FileName);
                     result.HINHANH = "/Content/ClientVender/media/186x113/" + pic;
-                    string path = Path.Combine(
-                                           Server.MapPath("~/Content/ClientVender/media/186x113"), pic);
+                    string path = Path.Combine(Server.MapPath("~/Content/ClientVender/media/186x113"), pic);
                     // file is uploaded
                     anh.SaveAs(path);
                 }
@@ -121,14 +120,38 @@ namespace AutoStore.Controllers.System
         public ActionResult Search()
         {
             string objmansx = Request.Form["mansx"];
+            string objtensp = Request.Form["tensp"];
             string objmausac = Request.Form["mausac"];
-            //string objmaloai = Request.Form["maloai"];
-            //string objmota = Request.Form["mota"];
-            //double objdongia = double.Parse(Request.Form["dongia"]);
-            //int objsoluong = Int32.Parse(Request.Form["soluong"]);
-            //int objnam = Int32.Parse(Request.Form["nam"]);
-            //int objkm = Int32.Parse(Request.Form["km"]);
+            string objmaloai = Request.Form["maloai"];
+            string objmota = Request.Form["mota"];
+            double objdongia=0;
+            if (Request.Form["dongia"] != "")
+            {
+                 objdongia = double.Parse(Request.Form["dongia"]);
+            }
+
+            int objsoluong = 0;
+            if (Request.Form["soluong"] != "")
+            {
+                objsoluong = Int32.Parse(Request.Form["soluong"]);
+            }
+
+            int objnam = 0;
+            if (Request.Form["nam"] != "")
+            {
+                objnam= Int32.Parse(Request.Form["nam"]);
+            }
+
+            int objkm = 0;
+            if (Request.Form["km"] != "")
+            {
+                objkm= Int32.Parse(Request.Form["km"]);
+            }
             List<Parameter> lipa = new List<Parameter>();
+            if (objtensp != "" && objtensp != null)
+            {
+                lipa.Add(new Parameter("TENSP", SqlDbType.VarChar, objtensp, 1));
+            }
             if (objmansx != "" && objmansx!=null)
             {
                 lipa.Add(new Parameter("MANSX", SqlDbType.VarChar,objmansx, 1));
@@ -136,6 +159,30 @@ namespace AutoStore.Controllers.System
             if (objmausac != "" && objmausac!=null)
             {
                 lipa.Add(new Parameter("MAUSAC", SqlDbType.VarChar,objmausac, 1));
+            }
+            if (objmaloai != "" && objmaloai != null)
+            {
+                lipa.Add(new Parameter("MALOAI", SqlDbType.VarChar, objmaloai, 1));
+            }
+            if (objmota != "" && objmota != null)
+            {
+                lipa.Add(new Parameter("MOTA", SqlDbType.VarChar, objmota, 1));
+            }
+            if (objdongia != 0)
+            {
+                lipa.Add(new Parameter("DONGIA", SqlDbType.Float, objdongia, 1));
+            }
+            if (objsoluong != 0)
+            {
+                lipa.Add(new Parameter("SOLUONG", SqlDbType.Int, objsoluong, 1));
+            }
+            if (objnam != 0)
+            {
+                lipa.Add(new Parameter("YEAR", SqlDbType.Int, objnam, 1));
+            }
+            if (objkm != 0)
+            {
+                lipa.Add(new Parameter("KM", SqlDbType.Int, objkm, 1));
             }
             //List<SANPHAM> li = null;
             //li = getAll(lipa.ToArray());
