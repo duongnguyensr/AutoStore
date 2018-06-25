@@ -77,12 +77,15 @@
                             @if (Session["ClientUserID"] != null)
                             {
                                 <li>
-                                    <a href="@Url.Action("Logout", null, new { area = string.Empty, controller = "ClientLogin" }, Request.Url.Scheme)">@Session["ClientUserName"].ToString()</a>
+                                    <a href="@Url.Action("Logout", null, new { area = string.Empty, controller = "ClientLogin" }, Request.Url.Scheme)">Sign out</a>
+                                </li>
+                                <li>
+                                    <a href="#">@Session["ClientUserName"].ToString()</a>
                                 </li>
                             }
                             else
                             {
-                                <li><a href="#">Sign up</a></li>
+                                <li><a data-toggle="modal" data-target="#signup">Sign up</a></li>
                                 <li><a data-toggle="modal" data-target="#LoginModal">Sign in</a></li>
                             }
                         </ul>
@@ -314,7 +317,7 @@
                 </div>
             </div>
         </div>
-
+        @* Login *@
         <div class="x_content">
             <div class="modal fade bs-example-modal-sm" id="LoginModal" tabindex="-1" role="dialog" aria-hidden="false">
                 <div class="modal-dialog modal-sm">
@@ -355,6 +358,103 @@
                                 <h6><a href="#" style="text-align:center">Or create account here!</a></h6>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @*---------------------------Sign up---------------------------*@
+        <div class="x_content">
+            <div class="modal fade bs-example-modal-lg" id="signup" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true" style="color:#f76d2b">×</span>
+                            </button>
+                            <div class="b-nav__logo" style="margin-left:355px">
+                                <h3><a href="home.html">Auto<span>Store</span></a></h3>
+                                <h2><a href="home.html"> Duong  Nguyen  Auto |</a></h2>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        @using (Html.BeginForm("Insert2", "Welcome"))
+                        {
+                        <div class="form-horizontal form-label-left" novalidate>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                                    Your name <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Họ và tên" required="required" type="text">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">
+                                    Email <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="email" id="email" name="email" required="required" placeholder="example@gmail.com" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+
+
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephone">
+                                    Phone number <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="tel" id="phone" name="phone" placeholder="09********* etc..." required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">
+                                    Address <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <textarea id="textarea" placeholder="Ha noi" required="required" name="adress" class="form-control col-md-7 col-xs-12"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">
+                                    Username <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input  placeholder="Duongnguyen" required="required" name="user" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">
+                                    Pass <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input  placeholder="******" required="required" name="pass" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="modal-footer">
+
+
+
+                                <div class="b-search__main-form-submit" style="float:right;">
+
+                                    <button type="submit" class="btn m-btn">Sign up<span class="fa fa-angle-right"></span></button>
+                                </div>
+                                <div style="float:right;margin-right:20px;margin-top:10px">
+                                    <button type="button" style="border:hidden" onclick="emptyvalue()" class="btn btn-default" data-dismiss="modal">Bỏ qua</button>
+                                </div>
+                            </div>
+                        </div>
+                        }
                     </div>
                 </div>
             </div>
